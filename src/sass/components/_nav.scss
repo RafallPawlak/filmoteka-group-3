@@ -1,0 +1,79 @@
+// -----------------------------------------------------------------------------
+// This file contains all styles related to the navigation of the site/application.
+// For media breaks look in _variables.scss
+// -----------------------------------------------------------------------------
+
+// Mobile 320-768//
+
+.nav {
+  display: flex;
+  gap: 31px;
+  justify-content: flex-end;
+  list-style-type: none;
+  text-transform: uppercase;
+  color: $color-brand-secondary;
+
+  &__link {
+    position: relative;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.14;
+    letter-spacing: 0.02em;
+    font-style: normal;
+    text-transform: capitalize;
+    color: $color-brand-secondary;
+    // min-height: 80px;
+    transition: color $transition;
+
+    &::after {
+      content: ' ';
+      display: block;
+      background-color: rgba(255, 255, 255, 0);
+      transition: background-color $transition;
+    }
+
+    &:hover::after,
+    &:active::after,
+    &:focus::after {
+      content: ' ';
+      position: absolute;
+      bottom: -3px;
+      left: 0px;
+      width: 100%;
+      height: 3px;
+      //   border-radius: 2px;
+      background-color: $color-brand-primary;
+    }
+
+    &:hover,
+    &:active,
+    &:focus {
+      //   color: $color-brand-primary;
+    }
+  }
+
+  &__link--current-page {
+    color: $color-brand-secondary;
+
+    &::after {
+      content: ' ';
+      position: absolute;
+      bottom: -3px;
+      left: 0px;
+      width: 100%;
+      height: 3px;
+      //   border-radius: 2px;
+      background-color: $color-brand-primary;
+    }
+  }
+}
+
+// Tablet 768-1024//
+@media screen and (min-width: $tablet) {
+}
+
+// Desktop 1024+//
+@media screen and (min-width: $desktop) {
+}

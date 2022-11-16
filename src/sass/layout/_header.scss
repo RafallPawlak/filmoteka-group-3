@@ -6,6 +6,9 @@
 // Mobile 320-768//
 
 .header {
+  display: flex;
+  flex-direction: column;
+  padding-top: 46px;
   min-height: 230px;
   background-image: $hero-bg-overlay, $hero-bg-img-mobile-1x;
   background-size: cover;
@@ -14,6 +17,18 @@
   @include retina {
     background-image: $hero-bg-overlay, $hero-bg-img-mobile-2x;
   }
+}
+
+.headerWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.navWrapper {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
 }
 
 // Tablet 768-1024//
