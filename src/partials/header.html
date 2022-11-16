@@ -1,26 +1,35 @@
 <section class="header">
   <div class="container">
-    <a class="logo" href="index.html"
-      ><svg class="logo">
-        <use href="images/svg/icons.svg#icon-logo"></use></svg
-    ></a>
-    <ul>
-      <li>Home</li>
-      <li>My Library</li>
-    </ul>
-    <form class="search-form" id="search-form">
-      <input
-        class="search__input"
-        type="text"
-        name="searchQuery"
-        autocomplete="off"
-        placeholder="Search for a movie..."
-      />
-      <button class="search__btn" type="submit">
-        <svg class="search__icon">
-          <use href="images/svg/icons.svg#icon-search"></use>
-        </svg>
-      </button>
-    </form>
+    <div class="headerWrapper">
+      <div class="navWrapper">
+        <a class="logo" href="index.html"
+          ><svg class="logo">
+            <use href="images/svg/icons.svg#icon-logo"></use></svg
+        ></a>
+        <ul class="nav">
+          <li>
+            <a class="nav__link nav__link--current-page" href="index.html"
+              >Home</a
+            >
+          </li>
+          <li><a class="nav__link" href="#">My Library</a></li>
+        </ul>
+      </div>
+      <form class="search__form" id="search-form">
+        <input
+          class="search__input"
+          type="text"
+          name="searchQuery"
+          autocomplete="off"
+          placeholder="Search for a movie..."
+        />
+        <button class="search__btn" type="submit">
+          <svg class="search__icon">
+            <use href="images/svg/icons.svg#icon-search"></use>
+          </svg>
+        </button>
+      </form>
+      <div class="message"></div>
+    </div>
   </div>
 </section>
