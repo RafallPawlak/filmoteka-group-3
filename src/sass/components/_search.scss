@@ -1,0 +1,51 @@
+// -----------------------------------------------------------------------------
+// This file contains all styles related to the logo of the site/application.
+// For media breaks look in _variables.scss
+// -----------------------------------------------------------------------------
+
+// Mobile 320-768//
+
+.search {
+  &__input {
+    padding: 4px;
+    background-color: transparent;
+    border: none;
+    border-bottom: solid 1px $color-brand-secondary;
+
+    &::placeholder {
+      /* Chrome, Firefox, Opera, Safari 10.1+ */
+      color: $color-text-secondary;
+      opacity: 1; /* Firefox */
+    }
+
+    :-ms-input-placeholder {
+      /* Internet Explorer 10-11 */
+      color: $color-text-secondary;
+    }
+
+    ::-ms-input-placeholder {
+      /* Microsoft Edge */
+      color: $color-text-secondary;
+    }
+  }
+
+  &__btn {
+    background-color: transparent;
+    border: none;
+  }
+  &__icon {
+    width: 12px;
+    height: 12px;
+    stroke: #fff;
+    // stroke-width: 1;
+    fill: none;
+  }
+}
+
+// Tablet 768-1024//
+@media screen and (min-width: $tablet) {
+}
+
+// Desktop 1024+//
+@media screen and (min-width: $desktop) {
+}

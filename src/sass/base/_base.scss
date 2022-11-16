@@ -1,0 +1,77 @@
+// -----------------------------------------------------------------------------
+// This file contains very basic styles.
+// -----------------------------------------------------------------------------
+
+/*
+ * Set up a decent box model on the root element
+ */
+html {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+/*
+ * Make all elements from the DOM inherit from the parent box-sizing
+ * Since `*` has a specificity of 0, it does not override the `html` value
+ * making all elements inheriting from the root box-sizing value
+ * See: https://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/
+ */
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+  margin: 0px;
+  padding: 0px;
+}
+
+/*
+ * Basic styles for links
+ */
+a {
+  text-decoration: none;
+}
+
+/*
+ * All margin and padding set to 0
+ */
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
+/*
+ * Basic styles for body
+ */
+body {
+  background-color: $color-bg-body-primary;
+}
+
+/**
+ * Basic typography style for copy text
+ */
+body {
+  color: $color-text-primary;
+  font: normal 100% / 1 $text-font-stack; // found in utils/variables
+}
+
+// SCROLLBAR
+
+/* Width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: $color-bg-body-primary;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: $color-bg-body-primary;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: $color-brand-primary;
+}

@@ -1,0 +1,41 @@
+// -----------------------------------------------------------------------------
+// This file contains all styles related to the button dark of the site/application.
+// For media breaks look in _variables.scss
+// -----------------------------------------------------------------------------
+
+// Mobile 320-768//
+.btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0);
+  border: 0px;
+  border-radius: 22px;
+  color: $color-text-primary;
+  font-weight: 400;
+  min-height: 44px;
+  cursor: pointer;
+
+  padding: 0 22px;
+  font-size: 16px;
+  line-height: 1.3125;
+
+  &:hover,
+  &:active,
+  &:focus {
+    background-color: $color-brand-primary;
+    color: $color-text-secondary;
+  }
+}
+
+// Tablet 768-1024//
+
+// Desktop 1024+//
+@media screen and (min-width: $desktop) {
+  .btn {
+    padding: 10px 22px;
+    font-size: 14px;
+    line-height: 1.285;
+    min-height: 40px;
+  }
+}

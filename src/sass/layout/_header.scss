@@ -1,0 +1,38 @@
+// -----------------------------------------------------------------------------
+// This file contains all styles related to the header of the site/application.
+// For media breaks look in _variables.scss
+// -----------------------------------------------------------------------------
+
+// Mobile 320-768//
+
+.header {
+  min-height: 230px;
+  background-image: $hero-bg-overlay, $hero-bg-img-mobile-1x;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  @include retina {
+    background-image: $hero-bg-overlay, $hero-bg-img-mobile-2x;
+  }
+}
+
+// Tablet 768-1024//
+@media screen and (min-width: $tablet) {
+  .header {
+    background-image: $hero-bg-overlay, $hero-bg-img-tablet-1x;
+
+    @include retina {
+      background-image: $hero-bg-overlay, $hero-bg-img-tablet-2x;
+    }
+  }
+}
+
+// Desktop 1024+//
+@media screen and (min-width: $desktop) {
+  .header {
+    background-image: $hero-bg-overlay, $hero-bg-img-desktop-1x;
+    @include retina {
+      background-image: $hero-bg-overlay, $hero-bg-img-desktop-2x;
+    }
+  }
+}

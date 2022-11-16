@@ -1,0 +1,34 @@
+// -----------------------------------------------------------------------------
+// This file contains all styles related to the footer of the site/application.
+// For media breaks look in _variables.scss
+// -----------------------------------------------------------------------------
+
+// Mobile 320-768//
+.footer {
+  background-color: $color-bg-body-secondary;
+
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 43px;
+    padding-bottom: 43px;
+  }
+}
+
+// Tablet 768-1024//
+@media screen and (min-width: $tablet) {
+  .footer {
+    &__wrapper {
+      flex-direction: row;
+      align-items: flex-start;
+      padding-bottom: 91px;
+    }
+  }
+}
+
+// Desktop 1024+//
+@media screen and (min-width: $desktop) {
+}

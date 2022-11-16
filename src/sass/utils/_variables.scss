@@ -1,0 +1,54 @@
+// -----------------------------------------------------------------------------
+// This file contains all application-wide Sass variables.
+// -----------------------------------------------------------------------------
+
+///=== Fonts ===///
+
+// Regular font family
+$text-font-stack: 'Roboto', sans-serif;
+
+///=== Colors ===///
+
+// Brand color
+$color-brand-primary: #ff6b01; // Accent color
+$color-brand-secondary: #fff;
+
+// Text color
+$color-text-primary: #000; // Color for dark body text
+$color-text-secondary: #fff; // Color for footer text
+$color-text-tertiary: #545454; // Color for white text
+$color-text-quaternary: #8c8c8c; // Color for modal light text
+
+// Background color
+$color-bg-body-primary: #fff; // Background for white sections
+$color-bg-body-secondary: #f7f7f7; // Backgorund for footer
+$color-bg-body-tertiary: #000; // Background for hero
+
+///=== Miscellaneous ===///
+
+// Container's maximum width
+$container-max-width: 1024px;
+
+// Media screen brakes
+$mobile: 320px;
+$tablet: 768px;
+$desktop: 1024px;
+
+// container's padding
+$container-padding-mobile: 20px;
+$container-padding-tablet: 75px;
+$container-padding-desktop: 71px;
+
+// Animation
+$transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
+// Hero background img
+$hero-bg-img-mobile-1x: url('../images/hero/hero-home-mobile@1x.jpg');
+$hero-bg-img-mobile-2x: url('../images/hero/hero-home-mobile@2x.jpg');
+$hero-bg-img-tablet-1x: url('../images/hero/hero-home-tablet@1x.jpg');
+$hero-bg-img-tablet-2x: url('../images/hero/hero-home-tablet@2x.jpg');
+$hero-bg-img-desktop-1x: url('../images/hero/hero-home-desktop@1x.jpg');
+$hero-bg-img-desktop-2x: url('../images/hero/hero-home-desktop@2x.jpg');
+
+// Hero background overlay
+$hero-bg-overlay: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56));

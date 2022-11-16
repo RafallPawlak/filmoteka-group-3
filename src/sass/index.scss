@@ -1,7 +1,25 @@
-@import './common';
-@import './variables';
-@import './header';
-@import './card-movie';
-@import './pagination';
-@import './footer';
-@import './modal-movie';
+
+// 1. Configuration and helpers
+@import './utils/variables';
+@import './utils/mixins';
+
+// 2. Vendors
+@import './vendors/normalize';
+
+// 3. Base stuff
+@import './base/base';
+
+// 4. Layout-related sections
+@import './layout/header';
+@import './layout/footer';
+@import './layout/container';
+@import './components/modal-movie';
+
+// 5. Components
+@import './components/button';
+@import './components/logo';
+@import './components/card-movie';
+@import './components/pagination';
+@import './components/search';
+// @import './common';
+
