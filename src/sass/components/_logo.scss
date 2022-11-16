@@ -1,0 +1,18 @@
+// -----------------------------------------------------------------------------
+// This file contains all styles related to the logo of the site/application.
+// For media breaks look in _variables.scss
+// -----------------------------------------------------------------------------
+
+// Mobile 320-768//
+
+.logo {
+  fill: none;
+}
+
+// Tablet 768-1024//
+@media screen and (min-width: $tablet) {
+}
+
+// Desktop 1024+//
+@media screen and (min-width: $desktop) {
+}
