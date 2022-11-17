@@ -1,0 +1,27 @@
+// -----------------------------------------------------------------------------
+// This file contains all styles related to the card of the site/application.
+// For media breaks look in _variables.scss
+// -----------------------------------------------------------------------------
+
+// Mobile 320-768//
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 20px;
+  list-style-type: none;
+}
+
+// Tablet 768-1024//
+@media screen and (min-width: $tablet) {
+  .grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+// Desktop 1024+//
+@media screen and (min-width: $desktop) {
+  .grid {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+}

@@ -6,10 +6,6 @@
 // Mobile 320-768//
 
 .header {
-  display: flex;
-  flex-direction: column;
-  padding-top: 46px;
-  min-height: 230px;
   background-image: $hero-bg-overlay, $hero-bg-img-mobile-1x;
   background-size: cover;
   background-position: center;
@@ -22,13 +18,23 @@
 .headerWrapper {
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  justify-content: space-between;
+  align-content: space-around;
+  //   gap: 25px;
 }
 
 .navWrapper {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
+}
+
+.message {
+  font-size: 14px;
+  line-height: 16px;
+  font-style: normal;
+  font-weight: 400;
+  color: rgba(255, 0, 27, 1);
 }
 
 // Tablet 768-1024//
@@ -39,6 +45,9 @@
     @include retina {
       background-image: $hero-bg-overlay, $hero-bg-img-tablet-2x;
     }
+  }
+  .message {
+    align-self: center;
   }
 }
 

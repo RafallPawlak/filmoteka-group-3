@@ -1,12 +1,21 @@
 // -----------------------------------------------------------------------------
-// This file contains all styles related to the header of the site/application.
+// This file contains all styles related to the gallery of the site/application.
 // For media breaks look in _variables.scss
 // -----------------------------------------------------------------------------
 
 // Mobile 320-768//
 
+.section {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
 // Tablet 768-1024//
 @media screen and (min-width: $tablet) {
+  .section {
+    padding-top: 60px;
+    padding-bottom: 60px;
+  }
 }
 
 // Desktop 1024+//
