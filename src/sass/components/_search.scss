@@ -6,11 +6,23 @@
 // Mobile 320-768//
 
 .search {
+  &__form {
+    display: flex;
+    align-items: center;
+    border-bottom: solid 1px $color-brand-secondary;
+    position: relative;
+  }
   &__input {
-    padding: 4px;
+    font-size: 14px;
+    line-height: 16px;
+    font-weight: 400;
+    font-style: normal;
+    width: 100%;
+    color: $color-brand-secondary;
+    padding: 4px 16px 4px 0;
     background-color: transparent;
     border: none;
-    border-bottom: solid 1px $color-brand-secondary;
+    // border-bottom: solid 1px $color-brand-secondary;
 
     &::placeholder {
       /* Chrome, Firefox, Opera, Safari 10.1+ */
@@ -30,6 +42,10 @@
   }
 
   &__btn {
+    // width: 24px;
+    // height: 24px;
+    position: absolute;
+    right: 0;
     background-color: transparent;
     border: none;
   }
