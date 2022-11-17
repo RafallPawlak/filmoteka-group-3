@@ -6,13 +6,34 @@
 // Mobile 320-768//
 
 .logo {
-  fill: none;
-  width: 24px;
-  height: 24px;
+  &__icon {
+    fill: none;
+    height: 24px;
+    width: 24px;
+  }
+
+  &__text {
+    display: none;
+  }
 }
 
 // Tablet 768-1024//
 @media screen and (min-width: $tablet) {
+  .logo {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 12px;
+    &__text {
+      display: inline-block;
+      color: $color-brand-secondary;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 30px;
+      line-height: 35px;
+    }
+  }
 }
 
 // Desktop 1024+//

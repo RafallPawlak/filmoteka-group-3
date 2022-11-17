@@ -1,0 +1,48 @@
+// -----------------------------------------------------------------------------
+// This file contains all styles related to the card of the site/application.
+// For media breaks look in _variables.scss
+// -----------------------------------------------------------------------------
+
+// Mobile 320-768//
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.thumb {
+  /* position: relative; */
+  height: 100%;
+  width: 100%;
+}
+
+.img {
+  border-radius: 5px;
+  display: block;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.title {
+  color: $color-text-primary;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 14px;
+  text-transform: uppercase;
+}
+
+.details {
+  color: $color-brand-primary;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 14px;
+}
+
+// Tablet 768-1024//
+@media screen and (min-width: $tablet) {
+}
+
+// Desktop 1024+//
+@media screen and (min-width: $desktop) {
+}

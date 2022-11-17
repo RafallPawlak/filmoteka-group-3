@@ -17,7 +17,6 @@
     line-height: 16px;
     font-weight: 400;
     font-style: normal;
-    width: 100%;
     color: $color-brand-secondary;
     padding: 4px 16px 4px 0;
     background-color: transparent;
@@ -42,8 +41,6 @@
   }
 
   &__btn {
-    // width: 24px;
-    // height: 24px;
     position: absolute;
     right: 0;
     background-color: transparent;
@@ -53,13 +50,20 @@
     width: 12px;
     height: 12px;
     stroke: #fff;
-    // stroke-width: 1;
     fill: none;
   }
 }
 
 // Tablet 768-1024//
 @media screen and (min-width: $tablet) {
+  .search {
+    &__form {
+      align-self: center;
+    }
+    &__input {
+      width: 336px;
+    }
+  }
 }
 
 // Desktop 1024+//
