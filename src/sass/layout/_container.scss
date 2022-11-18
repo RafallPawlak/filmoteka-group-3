@@ -11,6 +11,15 @@
   padding-left: $container-padding-mobile;
   padding-right: $container-padding-mobile;
   width: 100%;
+
+  &--header {
+    padding-top: 45px;
+    padding-bottom: 45px;
+    min-height: 230px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
 }
 
 // Tablet 768-1024//

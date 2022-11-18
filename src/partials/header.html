@@ -1,14 +1,24 @@
 <section class="header">
-  <div class="container">
-    <a class="logo" href="index.html"
-      ><svg class="logo">
-        <use href="images/svg/icons.svg#icon-logo"></use></svg
-    ></a>
-    <ul>
-      <li>Home</li>
-      <li>My Library</li>
-    </ul>
-    <form class="search-form" id="search-form">
+  <div class="container container--header">
+    <!-- <div class="headerWrapper"> -->
+    <div class="navWrapper">
+      <a class="logo" href="index.html"
+        ><svg class="logo__icon">
+          <use href="images/svg/icons.svg#icon-logo"></use></svg
+        ><span class="logo__text">Filmoteka</span></a
+      >
+      <nav>
+        <ul class="nav">
+          <li>
+            <a class="nav__link nav__link--current-page" href="index.html"
+              >Home</a
+            >
+          </li>
+          <li><a class="nav__link" href="#">My Library</a></li>
+        </ul>
+      </nav>
+    </div>
+    <form class="search__form" id="search-form">
       <input
         class="search__input"
         type="text"
@@ -22,5 +32,9 @@
         </svg>
       </button>
     </form>
+    <div class="message">
+      Search result not successful. Enter the correct movie name.
+    </div>
+    <!-- </div> -->
   </div>
 </section>
