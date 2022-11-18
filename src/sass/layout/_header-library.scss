@@ -5,13 +5,13 @@
 
 // Mobile 320-768//
 
-.header {
-  background-image: $hero-bg-overlay, $hero-bg-img-mobile-1x;
+.header-library {
+  background-image: $hero-bg-overlay, $hero-library-bg-img-mobile-1x;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   @include retina {
-    background-image: $hero-bg-overlay, $hero-bg-img-mobile-2x;
+    background-image: $hero-bg-overlay, $hero-library-bg-img-mobile-2x;
   }
 }
 
@@ -21,34 +21,36 @@
   justify-content: space-between;
 }
 
-.message {
-  font-size: 14px;
-  line-height: 16px;
-  font-style: normal;
-  font-weight: 400;
-  color: rgba(255, 0, 27, 1);
+.btn-wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  justify-content: space-between;
 }
 
 // Tablet 768-1024//
 @media screen and (min-width: $tablet) {
-  .header {
-    background-image: $hero-bg-overlay, $hero-bg-img-tablet-1x;
+  .header-library {
+    background-image: $hero-bg-overlay, $hero-library-bg-img-tablet-1x;
 
     @include retina {
-      background-image: $hero-bg-overlay, $hero-bg-img-tablet-2x;
+      background-image: $hero-bg-overlay, $hero-library-bg-img-tablet-2x;
     }
   }
-  .message {
-    align-self: center;
+  .btn-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    justify-content: center;
   }
 }
 
 // Desktop 1024+//
 @media screen and (min-width: $desktop) {
-  .header {
-    background-image: $hero-bg-overlay, $hero-bg-img-desktop-1x;
+  .header-library {
+    background-image: $hero-bg-overlay, $hero-library-bg-img-desktop-1x;
     @include retina {
-      background-image: $hero-bg-overlay, $hero-bg-img-desktop-2x;
+      background-image: $hero-bg-overlay, $hero-library-bg-img-desktop-2x;
     }
   }
 }
