@@ -63,12 +63,16 @@ body {
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: $color-bg-body-primary;
+  background: rgb(240, 240, 240);
+}
+
+::-webkit-scrollbar-track:hover {
+  background: rgb(220, 220, 220);
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: $color-bg-body-primary;
+  background: #f8b07d;
 }
 
 /* Handle on hover */

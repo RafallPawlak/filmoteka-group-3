@@ -42,13 +42,21 @@ $container-padding-desktop: 71px;
 // Animation
 $transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
 
-// Hero background img
+// Hero home background img
 $hero-bg-img-mobile-1x: url('../images/hero/hero-home-mobile@1x.jpg');
 $hero-bg-img-mobile-2x: url('../images/hero/hero-home-mobile@2x.jpg');
 $hero-bg-img-tablet-1x: url('../images/hero/hero-home-tablet@1x.jpg');
 $hero-bg-img-tablet-2x: url('../images/hero/hero-home-tablet@2x.jpg');
 $hero-bg-img-desktop-1x: url('../images/hero/hero-home-desktop@1x.jpg');
 $hero-bg-img-desktop-2x: url('../images/hero/hero-home-desktop@2x.jpg');
+
+// Hero library background img
+$hero-library-bg-img-mobile-1x: url('../images/hero/hero-library-mobile@1x.jpg');
+$hero-library-bg-img-mobile-2x: url('../images/hero/hero-library-mobile@2x.jpg');
+$hero-library-bg-img-tablet-1x: url('../images/hero/hero-library-tablet@1x.jpg');
+$hero-library-bg-img-tablet-2x: url('../images/hero/hero-library-tablet@2x.jpg');
+$hero-library-bg-img-desktop-1x: url('../images/hero/hero-library-desktop@1x.jpg');
+$hero-library-bg-img-desktop-2x: url('../images/hero/hero-library-desktop@2x.jpg');
 
 // Hero background overlay
 $hero-bg-overlay: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56));
