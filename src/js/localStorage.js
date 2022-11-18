@@ -4,7 +4,7 @@ const saveKey = (key, value) => {
         const filmId = JSON.stringify(value);
         localStorage.setItem(key, value);
     } catch (error) {
-        console.error(error);
+        console.log(error);
     }
 };
 // Getting key and his value from local storage
@@ -13,7 +13,7 @@ const getKey = key => {
         let filmId = localStorage.getItem(key);
         return (filmId = JSON.parse(filmId));
     } catch (error) {
-        console.error(error);
+        console.log(error);
     }
 };
 // Removing the key in local storage
@@ -21,7 +21,7 @@ const removeKey = key => {
     try {
         localStorage.removeItem(key);
     } catch (error) {
-        console.error(error);
+        console.log(error);
     }
 };
 
@@ -33,6 +33,27 @@ async function changeWatchedQueueList(event) {
         const watchedButton = document.querySelector(".klasaOpisujacaPrzyciskWatchedWModalu");
         const queueButton = document.querySelector(".klasaOpisujacaPrzyciskQueueWModalu");
 
-        watchedButton.addEventListener("click", )
+        watchedButton.addEventListener("click",);
+        queueButton.addEventListener("click",);
+    } catch (error) {
+    console.log(error);
     }
+    function addToWatched() {
+    let watchedList = [];
+    let existingWatchedList = load(watched);
+    watchedList = [...existingWatchedList];
+
+    let queueList = [];
+    let existingQueueList = load(queue);
+    queueList = [...existingQueueList];
+    }
+
+    const watchedSet = new Set(watchedList);
+    watchedList.push(id);
+    if (!watchedSet.has(id)) {
+        saveKey('watched', watchedList)
+    }
+
+    let queueSet = new Set(queueList);
+    
 }
