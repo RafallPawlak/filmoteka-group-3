@@ -6,87 +6,89 @@
 // Mobile 320-768//
 .footer {
   padding: 30px 0px;
-  height: 70px;
-  background-color: #fff;
-}
-.footer__container {
-  
+  background-color: #f7f7f7;
+
+  &__container {
     position: relative;
     padding-left: 15px;
     padding-right: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
   }
-  
-  @media screen and (min-width: 320px) {
-    .footer__container {
-      width: 310px;
-      margin: 0 auto;
+
+  &__text {
+    font-size: 14px;
+    line-height: 1.14;
+    font-weight: 400;
+  }
+
+  &__btn-open-modal-team {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  &__heart {
+    width: 14px;
+    height: 14px;
+    margin: 0px 7px;
+    animation: heart 1s infinite;
+
+    &:hover {
+      animation: heartbeat 1s infinite;
     }
   }
-  @media screen and (min-width: 768px) {
-    .footer__container {
-      width: 648px;
-    }
-  }
-  @media screen and (min-width: 1024px) {
-    .container {
-      width: 912px;
-    }
-  }
-
-.footer__btn-open-modal-team {
-  text-decoration: underline;
-  cursor: pointer;
 }
-
-.footer__text {
-  font-size: 14px;
-  line-height: 1.14;
-}
-
-.footer__second-text {
-  display: inline-block;
-  margin-top: 10px;
-}
-
 
 // serduszko)
 @keyframes heart {
-50% {transform: scale( 1.2 )}
+  50% {
+    transform: scale(1.2);
+  }
 }
 
 @keyframes heartbeat {
-0% {transform: scale( 1 )}
-20% {transform: scale( 1.25 )}
-40% {transform: scale( 1 )}
-60% {transform: scale( 1.25 )}
-80% {transform: scale( 1 )}
-100% {transform: scale( 1 )}
+  0% {
+    transform: scale(1);
+  }
+  20% {
+    transform: scale(1.25);
+  }
+  40% {
+    transform: scale(1);
+  }
+  60% {
+    transform: scale(1.25);
+  }
+  80% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
-.footer__heart {
- width: 14px;
- height: 14px;
- margin: 0px 7px;
- animation: heart 1s infinite;
-}
-
-.footer__heart:hover {
-  animation: heartbeat 1s infinite;
-}
 // Tablet 768-1024//
 @media screen and (min-width: $tablet) {
-  .footer__text {
-    text-align: center;
-    font-size: 16px;
-    line-height: 1.19;
-    color: $color-text-primary;
+  .footer {
+    &__container {
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      gap: 4px;
+    }
+    &__text {
+      font-size: 16px;
+      line-height: 1.19;
+      color: $color-text-primary;
+    }
   }
 }
 
 // Desktop 1024+//
 @media screen and (min-width: $desktop) {
   .footer__text {
-    text-align: center;
     font-size: 16px;
     line-height: 1.19;
     color: $color-text-primary;
