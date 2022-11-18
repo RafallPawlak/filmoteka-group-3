@@ -47,11 +47,37 @@
   text-transform: uppercase;
 }
 
+.details-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
 .details {
+  display: flex;
   color: $color-brand-primary;
   font-weight: 500;
   font-size: 12px;
-  line-height: 14px;
+  line-height: 16px;
+  text-transform: capitalize;
+}
+
+.rating {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  color: $color-text-secondary;
+  background-color: $color-brand-primary;
+  font-size: 12px;
+  font-weight: 500;
+  border-radius: 5px;
+  width: 36px;
+  height: 16px;
+  margin: 0;
+
+  &--visible {
+    display: inline-flex;
+  }
 }
 
 // Tablet 768-1024//
