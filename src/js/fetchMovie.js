@@ -2,7 +2,14 @@ const API_KEY_V3 = "bdba5342660bdd1dac5d09b885091a0c";
 const API_KEY_V4 = "";
 const API_URL = "https://api.themoviedb.org/3/";
 
-const filmsListHtml = document.querySelector(".movie-trends__films-list");
+//---------------------ROUNDING METHOD--------------------------
+function roundingMethodToFirstPlace(value){
+  let roundingValue = Number(Math.round(value + 'e+1') + 'e-1');
+  return roundingValue
+};
+//--------------------------------------------------------------
+
+const filmsListHtml = document.querySelector(".grid");
 
 let tempImageUrl = "";
 
@@ -13,7 +20,7 @@ async function fetchApi(){
     fetchApiConfig();
     fetchApiTrending()
     .then(film => {
-      const filmDetailsHtml = document.querySelectorAll(".film-details");
+      const filmDetailsHtml = document.querySelectorAll(".details");
       console.log("fetchApi -> fetchApiTrending.then here forEach start to get film details with fetchApiGetDetailsFilm methode");
       filmDetailsHtml.forEach(el => {
         fetchApiGetDetailsFilm(el)
@@ -57,10 +64,19 @@ async function fetchApiTrending(){
     let filmItems = "";
     film.results.forEach(result => {
       filmItems+=`
-      <li class="film-item">
-        <img class="film-image" src="${tempImageUrl}${result.poster_path}"></img>
-        <p class="film-title">${result.title}</p>
-        <p class="film-details" data-film_id="${result.id}"></p>
+      <li>
+        <figure class="card">
+          <div class="thumb">
+            <img class="img" src="${tempImageUrl}${result.poster_path}" />
+          </div>
+          <figcaption>
+            <h3 class="title">${result.title}</h3>
+            <div class="details-wrapper">
+              <p class="details" data-film_id="${result.id}"></p>
+              <div class="rating rating--visible">${roundingMethodToFirstPlace(result.vote_average)}</div>
+            </div>
+          </figcaption>
+        </figure>
       </li>
       `
     });
