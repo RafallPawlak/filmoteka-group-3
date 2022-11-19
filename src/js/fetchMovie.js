@@ -18,7 +18,7 @@ fetchApi();
 async function fetchApi(){
   try {
     fetchApiConfig();
-    fetchApiTrending()
+    fetchApiTrending(1)
     .then(film => {
       const filmDetailsHtml = document.querySelectorAll(".details");
       console.log("fetchApi -> fetchApiTrending.then here forEach start to get film details with fetchApiGetDetailsFilm methode");
@@ -49,10 +49,11 @@ async function fetchApiConfig(){
 // ------------------------------------------------------------
 
 // -------------------get trending films-----------------------
-async function fetchApiTrending(){
+export async function fetchApiTrending(page){
   try {
     const params = new URLSearchParams({
-      api_key: API_KEY_V3
+      api_key: API_KEY_V3,
+      page: page,
     });
     const response = await fetch(API_URL + "trending/" + "movie/" + "day" + "?" + params);
     const film = await response.json();
