@@ -1,6 +1,6 @@
 import { fetchApiTrending } from './fetchMovie';
 import Pagination from 'tui-pagination';
-import 'tui-pagination/dist/tui-pagination.css';
+//import 'tui-pagination/dist/tui-pagination.css';
 
 const container = document.getElementById('pagination');
 const options = { // below default value of options
