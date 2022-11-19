@@ -5,7 +5,7 @@ import Pagination from 'tui-pagination';
 const container = document.getElementById('pagination');
 const options = { // below default value of options
      totalItems: 1000,
-     itemsPerPage: 5,
+     itemsPerPage: 40,
      visiblePages: 5,
      page: 1,
      centerAlign: false,

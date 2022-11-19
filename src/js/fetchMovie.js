@@ -11,14 +11,15 @@ function roundingMethodToFirstPlace(value){
 
 const filmsListHtml = document.querySelector(".grid");
 
+let homePage = 1;
 let tempImageUrl = "";
 
 fetchApi();
 
-async function fetchApi(){
+export async function fetchApi(){
   try {
     fetchApiConfig();
-    fetchApiTrending(1)
+    fetchApiTrending(homePage)
     .then(film => {
       const filmDetailsHtml = document.querySelectorAll(".details");
       console.log("fetchApi -> fetchApiTrending.then here forEach start to get film details with fetchApiGetDetailsFilm methode");
