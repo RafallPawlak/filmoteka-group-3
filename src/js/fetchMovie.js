@@ -9,14 +9,140 @@ function roundingMethodToFirstPlace(value){
 };
 //--------------------------------------------------------------
 
+//---------------------CONNECT WITH HTML--------------------------
+const searchForm = document.getElementById("search-form");
 const filmsListHtml = document.querySelector(".grid");
+//----------------------------------------------------------------
 
 let homePage = 1;
 let tempImageUrl = "";
+let filmItems = "";
 
+//---------------------LOAD TRENDING FILMS--------------------------
 fetchApi();
+//------------------------------------------------------------------
 
-export async function fetchApi(){
+//---------------------LISTENERS TO SEARCH INPUT--------------------------
+searchForm.addEventListener("input", cancelInputValue);
+searchForm.addEventListener("submit", pageLoadSupport);
+//------------------------------------------------------------------------
+
+
+
+// ====================================== HANDLING SEARCH INPUT =====BEGIN========================================
+
+//---------------------REACTION ON EMPTY VALUE OF SEARCH INPUT METHODE (input)--------------------------
+function cancelInputValue(e){
+  e.preventDefault();
+  console.log("cancelInputValue function do nothing because input value is true");
+  if(!e.target.value){
+    console.log("cancelInputValue function. Input value was deleted so fetchApi function start load the most popular films");
+    tempImageUrl = "";
+    filmItems = "";
+    fetchApi()
+  }
+};
+//----------------------------------------------------------------------------------------------
+
+//---------------------REACTION ON SUBMIT OF SEARCH INPUT METHODE--------------------------
+function pageLoadSupport(evt){
+  evt.preventDefault()
+  console.log("pageLoadSupport function");
+  if(!searchForm.searchQuery.value){
+    console.log("pageLoadSupport function. Input value was deleted so fetchApi function start load the most popular films");
+    fetchApi()
+  }else{
+    filmsListHtml.innerHTML = "";
+    console.log("start search results by fetchApi function");
+    fetchApiKeyword();
+  }
+};
+//-----------------------------------------------------------------------------------------
+
+//--------------------------INITIAL FETCH API KEYWORD METHODE------------------------------
+async function fetchApiKeyword(){
+  try {
+    let searchInputValue = searchForm.searchQuery.value.trim();
+    console.log(searchInputValue);
+    fetchApiConfig();
+    fetchApiKeywordBase(searchInputValue);
+  } catch (error) {
+    console.log("fetchApiKeyword function error: ", error);
+  }
+};
+//-----------------------------------------------------------------------------------------
+
+//------------------USE ID AND CONFIG DATA TO GET DETAILS OF FILM--------------------------
+async function fetchApiKeywordBase(keyword){
+  try {
+    tempImageUrl = "";
+    filmItems = "";
+    const params = new URLSearchParams({
+      api_key: API_KEY_V3,
+      query: keyword,
+      page: "1"
+    });
+    const response = await fetch(API_URL + "search/" + "keyword" + "?" + params);
+    const listFilms = await response.json();
+    console.log(listFilms);
+    listFilms.results.forEach(result => {
+    createHtmlTags(result);
+    })
+  } catch (error) {
+    console.log("fetchApiKeywordBase function error: ", error);
+  }
+};
+//-----------------------------------------------------------------------------------------
+
+//-------------------------BUILD ELEMENTS OF HTML METHODE----------------------------------
+async function createHtmlTags(result){
+  try {
+    const params = new URLSearchParams({
+      api_key: API_KEY_V3
+    });
+    const response = await fetch(API_URL + "movie/" + result.id + "?" + params)
+    const filmDetails = await response.json();
+    console.log("createHtmlTags object content:", filmDetails);
+
+    if(filmDetails.poster_path && filmDetails.genres.length>0){
+      let yearWithDate = new Date(filmDetails.release_date);
+      const genresArray = filmDetails.genres.map(genre => {return genre.name});
+      console.log(genresArray);
+      console.log(tempImageUrl, filmDetails.poster_path);
+
+      filmItems+=`
+      <li>
+        <figure class="card">
+          <div class="thumb">
+            <img class="img" src="${tempImageUrl}${filmDetails.poster_path}" />
+          </div>
+          <figcaption>
+            <h3 class="title">${filmDetails.title}</h3>
+            <div class="details-wrapper">
+              <p class="details" data-film_id="${filmDetails.id}">${genresArray.join(", ")} &#124; ${yearWithDate.getFullYear()}</p>
+              <div class="rating rating--visible">${roundingMethodToFirstPlace(filmDetails.vote_average)}</div>
+            </div>
+          </figcaption>
+        </figure>
+      </li>
+      `
+      filmsListHtml.innerHTML = filmItems;
+    }else{
+      console.log("There are not exist poster_path and / or genres array");
+    };
+
+  } catch (error) {
+    console.log("createHtmlTags function error: ", error);
+  }
+};
+//-----------------------------------------------------------------------------------------
+// ====================================== HANDLING SEARCH INPUT =====END========================================
+
+
+
+// ====================================== HANDLING LOADING TRENDING FILMS ===BEGIN========================================
+//-------------------------------------MAIN METHODE----------------------------------------
+async function fetchApi(){
   try {
     fetchApiConfig();
     fetchApiTrending(homePage)
@@ -31,8 +157,9 @@ export async function fetchApi(){
     console.log("fetchApi: ", error);
   }
 };
+//-----------------------------------------------------------------------------------------
 
-// ------------------get image link methode---------------------
+// ------------------get base part image link methode---------------------
 async function fetchApiConfig(){
   try {
     const params = new URLSearchParams({
@@ -59,11 +186,8 @@ export async function fetchApiTrending(page){
     const response = await fetch(API_URL + "trending/" + "movie/" + "day" + "?" + params);
     const film = await response.json();
     console.log("fetchApiTrending object content", film);
-    let imageLink = tempImageUrl + film.results[0].poster_path;
-    console.log("fetchApiTrending completed link to img:", imageLink);
-
     console.log("fetchApiTrending forEach start to create HTML li>img tags");
-    let filmItems = "";
+    
     film.results.forEach(result => {
       filmItems+=`
       <li>
@@ -109,3 +233,4 @@ async function fetchApiGetDetailsFilm(elHtml){
   }
 };
 // ---------------------------------------------------------------------
+// ====================================== HANDLING LOADING TRENDING FILMS ===END========================================
