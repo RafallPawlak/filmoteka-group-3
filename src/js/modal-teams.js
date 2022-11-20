@@ -1,0 +1,42 @@
+export default [
+    {
+        h2: 'Team Lead',
+        preview: '',
+        description: 'photo Rafał Pawlak',
+        name: 'Rafał Pawlak',
+        linkedin: 'https://www.linkedin.com/in/rafa%C5%82-pawlak-904665252/',
+        github: 'https://github.com/RafallPawlak',
+    },
+    {
+        h2: 'Developed',
+        preview: '',
+        description: 'photo Jacek Pietrzak',
+        name: 'Jacek Pietrzak',
+        linkedin: 'https://www.linkedin.com/in/rafa%C5%82-pawlak-904665252/',
+        github: 'https://github.com/jacekpietrzak',
+    },
+    {
+        h2: 'Scrum Master',
+        preview: '',
+        description: 'photo Paweł Adamczuk',
+        name: 'Paweł Adamczuk',
+        linkedin: 'https://www.linkedin.com/in/paweł-adamczuk-a03211243/',
+        github: 'https://github.com/AdamczukPawel',
+    },
+    {
+        h2: 'Developer',
+        preview: '',
+        description: 'photo Tomasz Bielecki',
+        name: 'Tomasz Bielecki',
+        linkedin: 'https://www.linkedin.com/in/tomasz-bielecki-109035201',
+        github: 'https://github.com/831230',
+    },
+    {
+        h2: 'Developed',
+        preview: 'aszymanskaolejniczak@gmail.com',
+        description: 'photo Agnieszka Szymańska-Olejniczak',
+        name: 'Agnieszka Szymańska-Olejniczak',
+        linkedin: 'https://www.linkedin.com/in/agnieszka-szyma%C5%84ska-olejniczak-011756244/',
+        github: 'https://github.com/SzymanskaOlejniczak',
+    },
+];

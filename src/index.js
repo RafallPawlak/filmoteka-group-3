@@ -1,2 +1,4 @@
 import "./js/fetchMovie";
-import "./js/pagination"
+import "./js/pagination";
+import "./js/modal-footer";
+import "./js/modal-teams";
