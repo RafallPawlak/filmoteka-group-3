@@ -1,84 +1,230 @@
 
-  .team__container {
-    position: relative;
-    overflow-x: auto;
-    padding: 20px 0;
-    
-    color: #000000;
-    max-height: 100vh;
-    width: 65%;
-  
-    @media screen and (min-width: $tablet) {
-      width: 430px;
-    }
-    @media screen and (min-width: $desktop) {
-      width: 912px;
-      height: 568px;
-      padding: 0;
-      font-size: 18px;
-      overflow-x: visible;
-    }
+.is-hidden {
+  visibility: hidden;
+  pointer-events: none;
+  opacity: 0;
+}
+.lightbox {
+  position: fixed;
+  display: table;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
+
+.modal-background {
+  display: table-cell;
+  background: rgba(0, 0, 0, 0.5);
+  text-align: center;
+  vertical-align: middle;
+  width: 100%;
+}
+
+.lightbox__content {
+  position: relative;
+  background: rgb(244, 239, 228);
+  padding: 15px;
+  display: inline-block;
+  height: 100vh;
+  border-radius: 4px;
+
+  overflow-y: auto;
+
+  @media screen and (max-width: 479px) {
+    width: 300px;
   }
-  .team__card {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    flex-wrap: wrap;
-  
-    @media screen and (min-width: $tablet) {
-      width: 100%;
-      height: 100%;
-      &:nth-last-child(2) {
-        margin-bottom: 0;
-      }
-    }
-    @media screen and (min-width: $desktop) {
-    }
+
+  @media screen and (min-width: 480px) {
+    width: 350px;
   }
-  .close__button.team {
-    position: fixed;
-    padding: 0;
-    top: 10%;
-    right: 7%;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    background-color: $color-bg-body-secondary;
-    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
-    & .close__svg {
-      stroke: $color-brand-primary;
-    }
-    &:hover,
-    &:focus {
-      background-color: $color-bg-body-secondary;
-    }
-    &:hover .close__svg,
-    &:focus .close__svg {
-      stroke: $color-brand-primary;
-    }
-    @media screen and (min-width: $tablet) {
-      height: 60px;
-      width: 60px;
-    }
-    @media screen and (min-width: $desktop) {
-      position: absolute;
-      top: 5px;
-      right: -18%;
-      &:hover .close__svg,
-      &:focus .close__svg {
-        stroke: color-brand-primary;
-      }
-      &:hover,
-      &:focus {
-        background-color: $color-brand-primary;
-      }
-    }
+
+  @media screen and (min-width: $tablet) {
+    width: 500px;
+    height: 700px;
+    padding-left: 60px;
+    padding-right: 60px;
   }
-  .close__svg {
-    height: auto;
-    width: auto;
-    pointer-events: none;
-    transition: stroke 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  @media screen and (min-width: $desktop) {
+    width: 950px;
+    height: 640px;
+    padding-left: 45px;
+    padding-right: 45px;
   }
- 
-  
+}
+//======================title======================
+
+.modal-title {
+  position: relative;
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 16px;
+  color: $color-brand-primary;
+
+  padding-top: 15px;
+}
+
+//======================image-team======================
+
+.lightbox__image {
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
+    0px 2px 1px rgba(0, 0, 0, 0.3);
+  border-radius: 50%;
+}
+
+//====================card-team====================
+
+.team {
+  list-style: none;
+  padding-top: 30px;
+
+  @media screen and (min-width: $tablet) {
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 4vw;
+  }
+
+  @media screen and (min-width: $desktop) {
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 2vw;
+  }
+}
+
+.team-list {
+  margin-bottom: 40px;
+
+  @media screen and (min-width: $tablet) {
+    margin-bottom: 20px;
+  }
+}
+
+.lightbox__image {
+  margin: auto;
+  margin-bottom: 30px;
+}
+
+.team-name {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 35px;
+
+  margin-bottom: 5px;
+
+  color: $color-text-tertiary;
+}
+
+.contacts-link-type {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 16px;
+  color: $color-brand-primary;
+}
+
+//-----------------------links--------------
+
+.modal-links {
+  margin-top: 20px;
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
+
+  @media screen and (min-width: $desktop) {
+    grid-gap: 1vw;
+  }
+}
+
+.team-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  margin-bottom: 10px;
+  width: 35px;
+  height: 35px;
+  background-color: $color-text-tertiary;
+
+  border-radius: 50%;
+  transition: background-color $transition;
+
+  &:focus,
+  &:hover {
+    background-color: $color-brand-primary;
+  }
+}
+
+.social-link-icon {
+  width: 60%;
+  height: 60%;
+  fill: $color-text-secondary;
+}
+
+//===================button-modal==========================
+.button-close {
+  position: fixed;
+  display: flex;
+
+  right: calc(50% - 157px);
+
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  border: none;
+  align-items: center;
+  justify-content: center;
+
+  margin: 0;
+  padding: 0;
+
+  background-color: transparent;
+  fill: $color-text-quaternary;
+  transition: background-color $transition;
+  outline: none;
+
+  cursor: pointer;
+
+  background-position: center;
+  background-size: 60%;
+  background-repeat: no-repeat;
+
+  @media screen and (max-width: 479px) {
+    right: calc(50% - 165px);
+  }
+  @media screen and (min-width: 480px) {
+    right: calc(50% - 180px);
+  }
+
+  @media screen and (min-width: $tablet) {
+    right: calc(50% - 300px);
+  }
+
+  @media screen and (min-width: $desktop) {
+    right: calc(50% - 490px);
+  }
+
+  &:hover,
+  &:focus {
+    background-color: rgba(233, 101, 24, 0.5);
+    fill: $color-brand-secondary;
+  }
+}
+.footer-button {
+  color: $color-text-tertiary;
+  text-decoration-line: underline;
+  cursor: pointer;
+  border: none;
+  background-color: $color-bg-body-secondary;
+
+  &:hover,
+  &:focus {
+    color: $color-brand-tertiary;
+  }
+}
+.footer-icon {
+  width: 14px;
+  height: 13px;
+  margin-top: 10px;
+}

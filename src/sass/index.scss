@@ -1,6 +1,7 @@
 // 1. Configuration and helpers
 @import './utils/variables';
 @import './utils/mixins';
+@import './utils/visually-hidden';
 
 // 2. Vendors
 @import './vendors/normalize';
