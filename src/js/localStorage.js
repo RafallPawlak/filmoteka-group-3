@@ -2,7 +2,7 @@
 const saveKey = (key, value) => {
     try {
         const filmId = JSON.stringify(value);
-        localStorage.setItem(key, value);
+        localStorage.setItem(key, filmId);
     } catch (error) {
         console.log(error);
     }
@@ -10,8 +10,8 @@ const saveKey = (key, value) => {
 // Getting key and his value from local storage
 const getKey = key => {
     try {
-        let filmId = localStorage.getItem(key);
-        return (filmId = JSON.parse(filmId));
+        let filmIds = localStorage.getItem(key);
+        return (filmId = JSON.parse(filmIds));
     } catch (error) {
         console.log(error);
     }
@@ -136,7 +136,9 @@ async function changeWatchedQueueList(id) {
             if (queueSet.has(id)) {
                 textModalButtons(id);
             } else {
-                queueList.
+                queueList.push(id);
+                saveKey('queue', queuedList);
+                textModalButtons(id);
             }
         }
     }
@@ -151,7 +153,7 @@ async function changeWatchedQueueList(id) {
         let filmIndex = watchedList.idIndexOf(id);
         watchedList.splice(filmIndex, 1);
         saveKey('watched', watchedList);
-        textModalButtons(id);
+        textModalButtons();
     }
     // removing film ID from local storage key "queue"
     function removeFromQueue(id) {
@@ -164,6 +166,6 @@ async function changeWatchedQueueList(id) {
         let filmIndex = queueList.idIndexOf(id);
         queueList.splice(filmIndex, 1);
         saveKey('queue', queueList);
-        textModalButtons(id);
+        textModalButtons();
     }
 }
