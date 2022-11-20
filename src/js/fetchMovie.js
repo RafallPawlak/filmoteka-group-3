@@ -234,14 +234,3 @@ export async function fetchApiGetDetailsFilm(elHtml){
 };
 // ---------------------------------------------------------------------
 
-const card = document.querySelector('.grid');
-
-function open(e) {
-  if (e.target.parentElement.className ) {
-     
-    return console.log("modal");
-  }
-
-}
-
-card.addEventListener("click", open);

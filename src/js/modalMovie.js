@@ -3,7 +3,7 @@ import { fetchApiGetDetailsFilm } from "./fetchMovie";
 const overlay = document.querySelector('.modal-overlay');
 const body = document.querySelector('body');
 const movieDescription = document.querySelector('[data-movie-description]');
-const card = document.querySelector('li');
+const card = document.querySelector('.grid');
 overlay.addEventListener('click', onCloseModal);
 card.addEventListener('click', onOpenModal);
 
@@ -32,4 +32,14 @@ export function closeModal() {
   movieDescription.textContent = '';
   body.style.marginRight = '';
 }
- 
+
+
+function open(e) {
+  if (e.target.parentElement.className ) {
+     
+    return console.log("modal");
+  }
+
+}
+
+card.addEventListener("click", open);
