@@ -91,7 +91,7 @@ export async function fetchApiTrending(page){
 // ---------------------------------------------------------------------
 
 // --------------------get genres and year methode----------------------
-async function fetchApiGetDetailsFilm(elHtml){
+export async function fetchApiGetDetailsFilm(elHtml){
   try {
     const params = new URLSearchParams({
       api_key: API_KEY_V3
@@ -109,3 +109,15 @@ async function fetchApiGetDetailsFilm(elHtml){
   }
 };
 // ---------------------------------------------------------------------
+
+const card = document.querySelector('.grid');
+
+function open(e) {
+  if (e.target.parentElement.className ) {
+     
+    return console.log("modal");
+  }
+
+}
+
+card.addEventListener("click", open);
