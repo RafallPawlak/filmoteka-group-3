@@ -1,3 +1,4 @@
+import { fetchApi } from './fetchMovie';
 import { fetchApiTrending } from './fetchMovie';
 import Pagination from 'tui-pagination';
 //import 'tui-pagination/dist/tui-pagination.css';
