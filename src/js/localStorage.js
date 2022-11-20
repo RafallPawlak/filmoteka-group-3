@@ -121,13 +121,7 @@ async function changeWatchedQueueList(id) {
             let existingWatchedList = getKey('watched');
             if (existingWatchedList) {
                 watchedList = [...existingWatchedList];
-            }     
-
-            const queueSet = new Set(queueList);
-            queueList.push(id);
-            if (queueSet.has(id)) {
-                saveKey('queue', queueList)
-            }
+            }            
 
             let watchedSet = new Set(watchedList);
             if (watchedSet.has(id)) {
@@ -135,6 +129,14 @@ async function changeWatchedQueueList(id) {
                 let filmIndex = watchedList.idIndexOf(id);
                 watchedList.splice(filmIndex, 1);
                 saveKey('watched', watchedList);
+                textModalButtons(id);
+            }
+
+            const queueSet = new Set(queueList);
+            if (queueSet.has(id)) {
+                textModalButtons(id);
+            } else {
+                queueList.
             }
         }
     }
@@ -149,7 +151,7 @@ async function changeWatchedQueueList(id) {
         let filmIndex = watchedList.idIndexOf(id);
         watchedList.splice(filmIndex, 1);
         saveKey('watched', watchedList);
-        textModalButtons();
+        textModalButtons(id);
     }
     // removing film ID from local storage key "queue"
     function removeFromQueue(id) {
@@ -162,6 +164,6 @@ async function changeWatchedQueueList(id) {
         let filmIndex = queueList.idIndexOf(id);
         queueList.splice(filmIndex, 1);
         saveKey('queue', queueList);
-        textModalButtons;
+        textModalButtons(id);
     }
 }
