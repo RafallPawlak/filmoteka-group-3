@@ -7,6 +7,7 @@ const saveKey = (key, value) => {
         console.log(error);
     }
 };
+
 // Getting key and his value from local storage
 const getKey = key => {
     try {
@@ -16,6 +17,7 @@ const getKey = key => {
         console.log(error);
     }
 };
+
 // Removing the key in local storage
 const removeKey = key => {
     try {
