@@ -287,8 +287,8 @@ export async function createHtmlTags(result){
     <h4 class="about__title">About</h4>
     <p class="about__text">${ filmDetails.overview}</p>
     <div class="btn__container">
-      <button type="button" class="modal__btn" data-add-watched data-movie-id="id">Add to watched</button>
-      <button type="button" class="modal__btn" data-add-queue data-movie-id="id">Add to queue</button>
+      <button type="button" class="modal__btn" data-add-watched data-id="${ result }">Add to watched</button>
+      <button type="button" class="modal__btn" data-add-queue data-id="${ result }">Add to queue</button>
     </div>
   </div>
   <button type="button" data-movie-close>Close</button>
