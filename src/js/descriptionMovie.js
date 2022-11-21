@@ -32,8 +32,8 @@ let markupMovie =`
     <h4 class="about__title">About</h4>
     <p class="about__text">aboutText</p>
     <div class="btn__container">
-      <button type="button" class="modal__btn" data-add-watched>Add Watch</button>
-      <button type="button" class="modal__btn" data-add-queue>Add Queue</button>
+      <button type="button" class="modal__btn" data-add-watched>Add to watched</button>
+      <button type="button" class="modal__btn" data-add-queue>Add to queue</button>
     </div>
   </div>
   <button type="button" data-movie-close >Close</button>

@@ -193,7 +193,7 @@ export async function fetchApiTrending(page){
       <li>
         <figure class="card">
           <div class="thumb">
-            <img class="img" src="${tempImageUrl}${result.poster_path}" />
+            <img class="img" src="${tempImageUrl}${result.poster_path}" data-id="${result.id}"/>
           </div>
           <figcaption>
             <h3 class="title">${result.title}</h3>
