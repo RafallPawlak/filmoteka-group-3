@@ -1,7 +1,6 @@
-
 const descriptionMovie = document.querySelector('.modal');
 
-let markupMovie =`
+let markupMovie = `
   <div class="movie__description" data-movie-id="id">
 
   <div class="movie__poster-wrappaer">
@@ -32,8 +31,8 @@ let markupMovie =`
     <h4 class="about__title">About</h4>
     <p class="about__text">aboutText</p>
     <div class="btn__container">
-      <button type="button" class="modal__btn" data-add-watched>Add to watched</button>
-      <button type="button" class="modal__btn" data-add-queue>Add to queue</button>
+      <button type="button" class="modal__btn" data-add-watched data-movie-id="id">Add to watched</button>
+      <button type="button" class="modal__btn" data-add-queue data-movie-id="id">Add to queue</button>
     </div>
   </div>
   <button type="button" data-movie-close >Close</button>
