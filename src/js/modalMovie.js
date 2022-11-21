@@ -1,3 +1,5 @@
+import { createHtmlTags } from './fetchMovie';
+
 const body = document.querySelector('body');
 const card = document.querySelector("[data-modal-open]");
 const closeBtn = document.querySelector("[data-movie-close]");
@@ -13,7 +15,9 @@ export function openModal(e) {
   toggleModal();
   body.classList.add('no-scroll');
   window.addEventListener('keydown', onEscClick);
-  console.log("modal", e.target.parentElement.className);
+  const id = e.target.parentElement.dataset.id;
+  createHtmlTags(id);
+  console.log("modal", e.target.parentElement.className, id);
 }
 
 export function closeModal() {

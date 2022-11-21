@@ -12,6 +12,7 @@ function roundingMethodToFirstPlace(value){
 //---------------------CONNECT WITH HTML--------------------------
 const searchForm = document.getElementById("search-form");
 const filmsListHtml = document.querySelector(".grid");
+
 //----------------------------------------------------------------
 
 let homePage = 1;
@@ -80,7 +81,7 @@ async function fetchApiKeywordBase(keyword){
     const params = new URLSearchParams({
       api_key: API_KEY_V3,
       query: keyword,
-      page: "1"
+      page: 1,
     });
     const response = await fetch(API_URL + "search/" + "keyword" + "?" + params);
     const listFilms = await response.json();
@@ -95,46 +96,46 @@ async function fetchApiKeywordBase(keyword){
 //-----------------------------------------------------------------------------------------
 
 //-------------------------BUILD ELEMENTS OF HTML METHODE----------------------------------
-async function createHtmlTags(result){
-  try {
-    const params = new URLSearchParams({
-      api_key: API_KEY_V3
-    });
-    const response = await fetch(API_URL + "movie/" + result.id + "?" + params)
-    const filmDetails = await response.json();
-    console.log("createHtmlTags object content:", filmDetails);
+// export async function createHtmlTags(result){
+//   try {
+//     const params = new URLSearchParams({
+//       api_key: API_KEY_V3
+//     });
+//     const response = await fetch(API_URL + "movie/" + result.id + "?" + params)
+//     const filmDetails = await response.json();
+//     console.log("createHtmlTags object content:", filmDetails);
 
-    if(filmDetails.poster_path && filmDetails.genres.length>0){
-      let yearWithDate = new Date(filmDetails.release_date);
-      const genresArray = filmDetails.genres.map(genre => {return genre.name});
-      console.log(genresArray);
-      console.log(tempImageUrl, filmDetails.poster_path);
+//     if(filmDetails.poster_path && filmDetails.genres.length>0){
+//       let yearWithDate = new Date(filmDetails.release_date);
+//       const genresArray = filmDetails.genres.map(genre => {return genre.name});
+//       console.log(genresArray);
+//       console.log(tempImageUrl, filmDetails.poster_path);
 
-      filmItems+=`
-      <li>
-        <figure class="card">
-          <div class="thumb">
-            <img class="img" src="${tempImageUrl}${filmDetails.poster_path}" />
-          </div>
-          <figcaption>
-            <h3 class="title">${filmDetails.title}</h3>
-            <div class="details-wrapper">
-              <p class="details" data-film_id="${filmDetails.id}">${genresArray.join(", ")} &#124; ${yearWithDate.getFullYear()}</p>
-              <div class="rating rating--visible">${roundingMethodToFirstPlace(filmDetails.vote_average)}</div>
-            </div>
-          </figcaption>
-        </figure>
-      </li>
-      `
-      filmsListHtml.innerHTML = filmItems;
-    }else{
-      console.log("There are not exist poster_path and / or genres array");
-    };
+//       filmItems+=`
+//       <li>
+//         <figure class="card">
+//           <div class="thumb">
+//             <img class="img" src="${tempImageUrl}${filmDetails.poster_path}" />
+//           </div>
+//           <figcaption>
+//             <h3 class="title">${filmDetails.title}</h3>
+//             <div class="details-wrapper">
+//               <p class="details" data-film_id="${filmDetails.id}">${genresArray.join(", ")} &#124; ${yearWithDate.getFullYear()}</p>
+//               <div class="rating rating--visible">${roundingMethodToFirstPlace(filmDetails.vote_average)}</div>
+//             </div>
+//           </figcaption>
+//         </figure>
+//       </li>
+//       `
+//       filmsListHtml.innerHTML = filmItems;
+//     }else{
+//       console.log("There are not exist poster_path and / or genres array");
+//     };
 
-  } catch (error) {
-    console.log("createHtmlTags function error: ", error);
-  }
-};
+//   } catch (error) {
+//     console.log("createHtmlTags function error: ", error);
+//   }
+// };
 //-----------------------------------------------------------------------------------------
 // ====================================== HANDLING SEARCH INPUT =====END========================================
 
@@ -189,10 +190,13 @@ export async function fetchApiTrending(page){
     console.log("fetchApiTrending forEach start to create HTML li>img tags");
     
     film.results.forEach(result => {
-      filmItems+=`
+      filmItems +=`
+      
+
+
       <li>
         <figure class="card">
-          <div class="thumb">
+          <div class="thumb"  data-id="${result.id}">
             <img class="img" src="${tempImageUrl}${result.poster_path}" data-id="${result.id}"/>
           </div>
           <figcaption>
@@ -234,3 +238,70 @@ export async function fetchApiGetDetailsFilm(elHtml){
 };
 // ---------------------------------------------------------------------
 
+//-------------------------DESCRIPTION TEST----------------------------------------------
+const descriptionMovie = document.querySelector('.modal');
+
+export async function createHtmlTags(result){
+  try {
+    const params = new URLSearchParams({
+      api_key: API_KEY_V3
+    });
+    const response = await fetch(API_URL + "movie/" + result + "?" + params)
+    const filmDetails = await response.json();
+    console.log("createHtmlTags object content:", filmDetails);
+
+    if(filmDetails.poster_path && filmDetails.genres.length>0){
+      let yearWithDate = new Date(filmDetails.release_date);
+      const genresArray = filmDetails.genres.map(genre => {return genre.name});
+      console.log(genresArray);
+      console.log(tempImageUrl, filmDetails.poster_path);
+
+    const  markupMovie = `
+  <div class="movie__description" data-id="${ result }">
+
+  <div class="movie__poster-wrappaer">
+    <img src="https://image.tmdb.org/t/p/w500/${ filmDetails.poster_path }" alt="title" class="movie__poster" />
+  </div>
+  
+  <div class="movie__container">
+    <h3 class="movie__title">${ filmDetails.title }</h3>
+    <div class="description__container">
+      <div class="description__title-wrapper">
+        <p class="description__title">Vote / Votes</p>
+        <p class="description__title">Popularity</p>
+        <p class="description__title">Original Title</p>
+        <p class="description__title">Genre</p>
+      </div>
+
+      <div class="description__text-wrapper">
+        <p class="description__text">
+          <span class="vote vote--accent">${ filmDetails.vote_average }&#47;
+          <span class="vote">${ filmDetails.vote_count }</span
+          >
+        </p>
+        <p class="description__text description__popularity">${ filmDetails.popularity }</p>
+        <p class="description__text">${ filmDetails.orginal_title}</p>
+        <p class="description__text">${ genresArray }</p>
+      </div>
+    </div>
+    <h4 class="about__title">About</h4>
+    <p class="about__text">aboutText</p>
+    <div class="btn__container">
+      <button type="button" class="modal__btn" data-add-watched data-movie-id="id">Add to watched</button>
+      <button type="button" class="modal__btn" data-add-queue data-movie-id="id">Add to queue</button>
+    </div>
+  </div>
+  <button type="button" data-movie-close >Close</button>
+</div>
+  `;
+
+descriptionMovie.innerHTML = markupMovie;
+
+   }else{
+      console.log("There are not exist poster_path and / or genres array");
+    };
+
+  } catch (error) {
+    console.log("createHtmlTags function error: ", error);
+  }
+};
