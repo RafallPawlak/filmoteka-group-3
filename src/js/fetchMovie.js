@@ -188,7 +188,7 @@ export async function fetchApiTrending(page){
     const film = await response.json();
     console.log("fetchApiTrending object content", film);
     console.log("fetchApiTrending forEach start to create HTML li>img tags");
-    
+    filmItems = '';
     film.results.forEach(result => {
       filmItems +=`
       
