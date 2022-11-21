@@ -29,7 +29,6 @@ fetchApi();
 // //------------------------------------------------------------------------
 
 
-
 // ====================================== HANDLING SEARCH INPUT =====BEGIN========================================
 
 //---------------------REACTION ON EMPTY VALUE OF SEARCH INPUT METHODE (input)--------------------------
@@ -191,9 +190,6 @@ export async function fetchApiTrending(page){
     filmItems = '';
     film.results.forEach(result => {
       filmItems +=`
-      
-
-
       <li>
         <figure class="card">
           <div class="thumb"  data-id="${result.id}">
