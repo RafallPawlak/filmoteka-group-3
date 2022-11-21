@@ -33,9 +33,10 @@ export default [
     },
     {
         h2: 'Developed',
-        preview: 'aszymanskaolejniczak@gmail.com',
+        preview: '',
         description: 'photo Agnieszka Szymańska-Olejniczak',
         name: 'Agnieszka Szymańska-Olejniczak',
+        maito:'https://outlook.com',
         linkedin: 'https://www.linkedin.com/in/agnieszka-szyma%C5%84ska-olejniczak-011756244/',
         github: 'https://github.com/SzymanskaOlejniczak',
     },
