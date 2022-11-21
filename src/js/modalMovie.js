@@ -1,45 +1,37 @@
-// import { fetchApiGetDetailsFilm } from "./fetchMovie";
+const body = document.querySelector('body');
+const card = document.querySelector("[data-modal-open]");
+const closeBtn = document.querySelector("[data-movie-close]");
+const modal = document.querySelector("[data-modal]");
 
-// const overlay = document.querySelector('.modal-overlay');
-// const body = document.querySelector('body');
-// const movieDescription = document.querySelector('[data-movie-description]');
-// const card = document.querySelector('.grid');
-// overlay.addEventListener('click', onCloseModal);
-// card.addEventListener('click', onOpenModal);
+card.addEventListener('click', openModal);
+closeBtn.addEventListener('click', closeModal);
 
-// export function onOpenModal() {
-// //   const marginSize = window.innerWidth - body.clientWidth;
-// //   if (marginSize) {
-// //     body.style.marginRight = marginSize + 'px';
-// //   }
-//     console.log("modal");
-// //   overlay.classList.add('visiable');
-// //   body.classList.add('no-scroll');
+export function openModal(e) {
+  if (e.target.parentElement.className !== 'thumb') {
+    return;
+  }
+  toggleModal();
+  body.classList.add('no-scroll');
+  window.addEventListener('keydown', onEscClick);
+  console.log("modal", e.target.parentElement.className);
+}
 
-// //   window.addEventListener('keydown', onEscClick);
-// }
+export function closeModal() {
+  modal.classList.toggle("is-hidden")
+  body.classList.remove('no-scroll');
+}
 
+function toggleModal() {
+  modal.classList.toggle("is-hidden");
+}
 
-// export function onCloseModal(e) {
-//   if (e.target === overlay) {
-//     closeModal();
-//   }
-// }
-
-// export function closeModal() {
-//   overlay.classList.remove('visiable');
-//   body.classList.remove('no-scroll');
-//   movieDescription.textContent = '';
-//   body.style.marginRight = '';
-// }
+function onEscClick(event) {
+  if (event.code === 'Escape') {
+    closeModal();
+    window.removeEventListener('keydown', onEscClick);
+  }
+}
 
 
-// function open(e) {
-//   if (e.target.parentElement.className ) {
-     
-//     return console.log("modal");
-//   }
 
-// }
 
-// card.addEventListener("click", open);
