@@ -280,7 +280,7 @@ export async function createHtmlTags(result){
           >
         </p>
         <p class="description__text description__popularity">${ filmDetails.popularity }</p>
-        <p class="description__text">${ filmDetails.orginal_title}</p>
+        <p class="description__text">${ filmDetails.original_title}</p>
         <p class="description__text">${ genresArray }</p>
       </div>
     </div>
@@ -291,7 +291,7 @@ export async function createHtmlTags(result){
       <button type="button" class="modal__btn" data-add-queue data-movie-id="id">Add to queue</button>
     </div>
   </div>
-  <button type="button" data-movie-close >Close</button>
+  <button type="button" data-movie-close>Close</button>
 </div>
   `;
 
