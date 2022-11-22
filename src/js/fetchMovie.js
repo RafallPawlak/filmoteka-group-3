@@ -24,8 +24,11 @@ fetchApi();
 //------------------------------------------------------------------
 
 //---------------------LISTENERS TO SEARCH INPUT--------------------------
-// searchForm.addEventListener("input", cancelInputValue);
-// searchForm.addEventListener("submit", pageLoadSupport);
+if(searchForm){
+  searchForm.addEventListener("input", cancelInputValue);
+  searchForm.addEventListener("submit", pageLoadSupport);
+}
+
 // //------------------------------------------------------------------------
 
 
