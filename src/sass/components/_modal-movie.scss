@@ -23,7 +23,7 @@ body.no-scroll {
 
 .backdrop.is-hidden {
   opacity: 0;
-  //pointer-events: none;
+  pointer-events: none;
 }
 
 .backdrop.is-hidden .modal {
@@ -32,8 +32,9 @@ body.no-scroll {
 }
 
 .modal {
+  
   z-index: 3000;
-  overflow-y:scroll;
+  overflow-y: auto;
   position: relative;
   display: flex;
   padding-top: 48px;
@@ -43,8 +44,10 @@ body.no-scroll {
  // transform: translate(-50%, -50%) scale(1);
   //transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
   width: 90%;
-  max-height: 900px;
+  //max-height: 900px;
+  height: auto;
   margin-top: 20px;
+  margin-bottom: 20px;
   background-color: white;
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 2px 1px rgba(0, 0, 0, 0.2);
   border-radius: 1px;
