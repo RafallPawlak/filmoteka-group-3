@@ -5,7 +5,9 @@ const body = document.querySelector('body');
 const card = document.querySelector("[data-modal-open]");
 const modal = document.querySelector("[data-modal]");
 
-card.addEventListener('click', openModal);
+if(card){
+  card.addEventListener('click', openModal);
+}
 
 export function openModal(e) {
   if (e.target.parentElement.className !== 'thumb') {
