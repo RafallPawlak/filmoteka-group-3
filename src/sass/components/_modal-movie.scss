@@ -44,7 +44,6 @@ body.no-scroll {
  // transform: translate(-50%, -50%) scale(1);
   //transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
   width: 90%;
-  //max-height: 900px;
   height: auto;
   margin-top: 20px;
   margin-bottom: 20px;
@@ -55,6 +54,7 @@ body.no-scroll {
 
 @media screen and (min-width: $tablet) {
   .modal {
+    overflow: hidden;
     width: 618px;
     height: auto;
     margin-top: 0px;

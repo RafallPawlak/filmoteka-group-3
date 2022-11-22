@@ -213,7 +213,8 @@
             }
         &__poster-wrappaer {
             width: 264px;
-            height: 356px;
+           
+            overflow: hidden;
         }
 
         &__container {
@@ -235,9 +236,13 @@
                 width: 150px;
             }
     }
+
+    .btn__container {
+        margin-bottom: 0px;
+}
 }
 
-@media screen and (min-width: $tablet) {
+@media screen and (min-width: $desktop) {
     .movie {
         &__title {
             font-size: 30px;
@@ -247,6 +252,7 @@
         &__poster-wrappaer {
             width: 396px;
             height: 477px;
+            object-fit: contain;
         }
 
          &__container {
