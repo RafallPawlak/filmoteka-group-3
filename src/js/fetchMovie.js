@@ -13,7 +13,7 @@ function roundingMethodToFirstPlace(value){
 //---------------------CONNECT WITH HTML--------------------------
 const searchForm = document.getElementById("search-form");
 const filmsListHtml = document.querySelector(".grid");
-
+const alertNotResults = document.querySelector(".message");
 //----------------------------------------------------------------
 
 let homePage = 1;
@@ -25,8 +25,11 @@ fetchApi();
 //------------------------------------------------------------------
 
 //---------------------LISTENERS TO SEARCH INPUT--------------------------
-// searchForm.addEventListener("input", cancelInputValue);
-// searchForm.addEventListener("submit", pageLoadSupport);
+if(searchForm){
+  searchForm.addEventListener("input", cancelInputValue);
+  searchForm.addEventListener("submit", pageLoadSupport);
+}
+
 // //------------------------------------------------------------------------
 
 
@@ -38,6 +41,7 @@ function cancelInputValue(e){
   console.log("cancelInputValue function do nothing because input value is true");
   if(!e.target.value){
     console.log("cancelInputValue function. Input value was deleted so fetchApi function start load the most popular films");
+    alertNotResults.innerHTML = "";
     tempImageUrl = "";
     filmItems = "";
     fetchApi()
@@ -85,10 +89,16 @@ async function fetchApiKeywordBase(keyword){
     });
     const response = await fetch(API_URL + "search/" + "keyword" + "?" + params);
     const listFilms = await response.json();
-    console.log(listFilms);
-    listFilms.results.forEach(result => {
-    createHtmlTags(result);
-    })
+    if(listFilms.results.length===0){
+      console.log("There are not result. Function stops.");
+      alertNotResults.innerHTML = "Search result not successful. Enter the correct movie name.";
+    }else{
+      console.log("There are results. GO!");
+      alertNotResults.innerHTML = "";
+      listFilms.results.forEach(result => {
+        createHtmlTagsSearch(result);
+      })
+    }
   } catch (error) {
     console.log("fetchApiKeywordBase function error: ", error);
   }
@@ -96,46 +106,46 @@ async function fetchApiKeywordBase(keyword){
 //-----------------------------------------------------------------------------------------
 
 //-------------------------BUILD ELEMENTS OF HTML METHODE----------------------------------
-// export async function createHtmlTags(result){
-//   try {
-//     const params = new URLSearchParams({
-//       api_key: API_KEY_V3
-//     });
-//     const response = await fetch(API_URL + "movie/" + result.id + "?" + params)
-//     const filmDetails = await response.json();
-//     console.log("createHtmlTags object content:", filmDetails);
+export async function createHtmlTagsSearch(result){
+  try {
+    const params = new URLSearchParams({
+      api_key: API_KEY_V3
+    });
+    const response = await fetch(API_URL + "movie/" + result.id + "?" + params)
+    const filmDetails = await response.json();
+    console.log("createHtmlTags object content:", filmDetails);
 
-//     if(filmDetails.poster_path && filmDetails.genres.length>0){
-//       let yearWithDate = new Date(filmDetails.release_date);
-//       const genresArray = filmDetails.genres.map(genre => {return genre.name});
-//       console.log(genresArray);
-//       console.log(tempImageUrl, filmDetails.poster_path);
+    if(filmDetails.poster_path && filmDetails.genres.length>0){
+      let yearWithDate = new Date(filmDetails.release_date);
+      const genresArray = filmDetails.genres.map(genre => {return genre.name});
+      console.log(genresArray);
+      console.log(tempImageUrl, filmDetails.poster_path);
 
-//       filmItems+=`
-//       <li>
-//         <figure class="card">
-//           <div class="thumb">
-//             <img class="img" src="${tempImageUrl}${filmDetails.poster_path}" />
-//           </div>
-//           <figcaption>
-//             <h3 class="title">${filmDetails.title}</h3>
-//             <div class="details-wrapper">
-//               <p class="details" data-film_id="${filmDetails.id}">${genresArray.join(", ")} &#124; ${yearWithDate.getFullYear()}</p>
-//               <div class="rating rating--visible">${roundingMethodToFirstPlace(filmDetails.vote_average)}</div>
-//             </div>
-//           </figcaption>
-//         </figure>
-//       </li>
-//       `
-//       filmsListHtml.innerHTML = filmItems;
-//     }else{
-//       console.log("There are not exist poster_path and / or genres array");
-//     };
+      filmItems+=`
+      <li>
+        <figure class="card">
+          <div class="thumb">
+            <img class="img" src="${tempImageUrl}${filmDetails.poster_path}" />
+          </div>
+          <figcaption>
+            <h3 class="title">${filmDetails.title}</h3>
+            <div class="details-wrapper">
+              <p class="details" data-film_id="${filmDetails.id}">${genresArray.join(", ")} &#124; ${yearWithDate.getFullYear()}</p>
+              <div class="rating rating--visible">${roundingMethodToFirstPlace(filmDetails.vote_average)}</div>
+            </div>
+          </figcaption>
+        </figure>
+      </li>
+      `
+      filmsListHtml.innerHTML = filmItems;
+    }else{
+      console.log("There are not exist poster_path and / or genres array");
+    };
 
-//   } catch (error) {
-//     console.log("createHtmlTags function error: ", error);
-//   }
-// };
+  } catch (error) {
+    console.log("createHtmlTags function error: ", error);
+  }
+};
 //-----------------------------------------------------------------------------------------
 // ====================================== HANDLING SEARCH INPUT =====END========================================
 
@@ -166,6 +176,7 @@ async function fetchApiConfig(){
     const params = new URLSearchParams({
       api_key: API_KEY_V3
     });
+    // SPINER START
     const response = await fetch(API_URL + "configuration" + "?" + params);
     const config = await response.json();
     console.log("fetchApiConfig object content:", config);
@@ -186,6 +197,7 @@ export async function fetchApiTrending(page){
     });
     const response = await fetch(API_URL + "trending/" + "movie/" + "day" + "?" + params);
     const film = await response.json();
+    // SPINER END
     console.log("fetchApiTrending object content", film);
     console.log("fetchApiTrending forEach start to create HTML li>img tags");
     filmItems = '';
@@ -274,6 +286,8 @@ export async function createHtmlTags(result){
         <p class="description__text">
           <span class="vote--accent">${roundingMethodToFirstPlace( filmDetails.vote_average) }</span>&#47;<span class="vote">${ filmDetails.vote_count }</span
           >
+          <span class="vote vote--accent">${ filmDetails.vote_average }&#47;</span>
+          <span class="vote">${ filmDetails.vote_count }</span>
         </p>
         <p class="description__text description__popularity">${ filmDetails.popularity }</p>
         <p class="description__text">${ filmDetails.original_title}</p>
@@ -283,8 +297,8 @@ export async function createHtmlTags(result){
     <h4 class="about__title">About</h4>
     <p class="about__text">${ filmDetails.overview}</p>
     <div class="btn__container">
-      <button type="button" class="modal__btn" data-add-watched data-id="${ result }">Add to watched</button>
-      <button type="button" class="modal__btn" data-add-queue data-id="${ result }">Add to queue</button>
+      <button type="button" class="modal__btn btn__watched" data-id="${ result }">Add to watched</button>
+      <button type="button" class="modal__btn btn__queue" data-id="${ result }">Add to queue</button>
     </div>
   </div>
   <button type="button" class="modal__close" data-movie-close>
