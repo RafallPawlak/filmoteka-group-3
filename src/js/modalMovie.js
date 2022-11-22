@@ -1,12 +1,13 @@
 import { createHtmlTags } from './fetchMovie';
+console.log("modalMovie begin file. It is before create modal window");
 
 const body = document.querySelector('body');
 const card = document.querySelector("[data-modal-open]");
-const closeBtn = document.querySelector("[data-movie-close]");
 const modal = document.querySelector("[data-modal]");
 
-card.addEventListener('click', openModal);
-closeBtn.addEventListener('click', closeModal);
+if(card){
+  card.addEventListener('click', openModal);
+}
 
 export function openModal(e) {
   if (e.target.parentElement.className !== 'thumb') {
@@ -16,7 +17,13 @@ export function openModal(e) {
   body.classList.add('no-scroll');
   window.addEventListener('keydown', onEscClick);
   const id = e.target.parentElement.dataset.id;
-  createHtmlTags(id);
+  createHtmlTags(id)
+  .then(el =>{
+    console.log("it is after create modal window");
+    const closeBtn = document.querySelector("[data-movie-close]");
+    console.log(closeBtn);
+    closeBtn.addEventListener('click', closeModal);
+  })
   console.log("modal", e.target.parentElement.className, id);
 }
 
@@ -35,7 +42,3 @@ function onEscClick(event) {
     window.removeEventListener('keydown', onEscClick);
   }
 }
-
-
-
-
