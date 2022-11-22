@@ -1,6 +1,6 @@
-import { fetchApiById } from './fetchApiById';
-import { openModal } from './modalMovie';
+// import { openModal } from './modalMovie';
 
+const card = document.querySelector('[data-modal-open]');
 // Saving value to the key in local storage
 const saveKey = (key, value) => {
   try {
@@ -15,7 +15,7 @@ const saveKey = (key, value) => {
 const getKey = key => {
   try {
     let filmIds = localStorage.getItem(key);
-    return (filmId = JSON.parse(filmIds));
+    return (filmId = JSON.parse(filmIds) || undefined);
   } catch (error) {
     console.log(error);
   }
@@ -31,44 +31,38 @@ const removeKey = key => {
 };
 
 // changing text in modal buttons depending on their assignment to local storage key
-async function textModalButtons(id) {
-  const watchedButton = document.querySelector('[data-add-watched]');
-  const queueButton = document.querySelector('[data-add-queue]');
+export async function textModalButtons(id) {
+  const watchedButton = document.querySelector('.btn__watched');
+  const queueButton = document.querySelector('.btn__queue');
   // checking if id is in the list
-  function localStorageCheck(id, key) {
-    let array = [];
-    let existingArray = getKey(key);
-    if (existingArray) {
-      array = [...existingArray];
+  if (localStorageCheck(id, 'watched')) {
+    function changeBtnText() {
+      watchedButton.textContent = 'Remove from watched';
+      watchedButton.classList.add('in-local-storage');
     }
-    const listSet = new Set(array);
-    return listSet.has(id);
-  }
-
-  if (!localStorageCheck(id, 'watched')) {
+    setTimeout(changeBtnText, 0);
+  } else {
     watchedButton.textContent = 'Add to watched';
     watchedButton.classList.remove('in-local-storage');
-  } else {
-    watchedButton.textContent = 'Remove from watched';
-    watchedButton.classList.add('in-local-storage');
   }
 
-  if (!localStorageCheck(id, 'queue')) {
+  if (localStorageCheck(id, 'queue')) {
+    function changeBtnText() {
+      queueButton.textContent = 'Remove from queue';
+      queueButton.classList.add('in-local-storage');
+    }
+    setTimeout(changeBtnText, 0);
+  } else {
     queueButton.textContent = 'Add to queue';
     queueButton.classList.remove('in-local-storage');
-  } else {
-    queueButton.textContent = 'Remove from queue';
-    queueButton.classList.add('in-local-storage');
   }
 }
 
-async function changeWatchedQueueList(id) {
+export async function changeWatchedQueueList(id) {
+  console.log('start changeWatchedQueueList');
   try {
-    const movieID = await fetchApiById(id);
-    openModal(movieID);
-
-    const watchedButton = document.querySelector('[data-add-watched]');
-    const queueButton = document.querySelector('[data-add-queue]');
+    const watchedButton = document.querySelector('.btn__watched');
+    const queueButton = document.querySelector('.btn__queue');
 
     watchedButton.addEventListener('click', addToWatched);
     queueButton.addEventListener('click', addToQueue);
@@ -77,8 +71,9 @@ async function changeWatchedQueueList(id) {
   }
   // adding film ID to local storage key "watched"
   function addToWatched() {
-    const watchedButton = document.querySelector('[data-add-watched]');
-    if (!watchedButton.classList.contains('in-local-storage')) {
+    console.log('start addToWatched');
+    const watchedButton = document.querySelector('.btn__watched');
+    if (watchedButton.classList.contains('in-local-storage')) {
       removeFromWatched(id);
     } else {
       let watchedList = [];
@@ -89,8 +84,16 @@ async function changeWatchedQueueList(id) {
 
       let queueList = [];
       let existingQueueList = getKey('queue');
-      if (existingWatchedList) {
+      if (existingQueueList) {
         queueList = [...existingQueueList];
+      }
+
+      let queueSet = new Set(queueList);
+      if (queueSet.has(id)) {
+        removeKey('queue');
+        let filmIndex = queueList.indexOf(id);
+        queueList.splice(filmIndex, 1);
+        saveKey('queue', queueList);
       }
 
       const watchedSet = new Set(watchedList);
@@ -101,26 +104,51 @@ async function changeWatchedQueueList(id) {
         saveKey('watched', watchedList);
         textModalButtons(id);
       }
-
-      let queueSet = new Set(queueList);
-      if (queueSet.has(id)) {
-        removeKey('queue');
-        let filmIndex = queueList.idIndexOf(id);
-        queueList.splice(filmIndex, 1);
-        saveKey('queue', queueList);
-      }
     }
+    console.log('end addToWatched');
+  }
+  // removing film ID from local storage key "watched"
+  function removeFromWatched(id) {
+    console.log('start removeWatched');
+    let watchedList = [];
+    let existingWatchedList = getKey('watched');
+    if (existingWatchedList) {
+      watchedList = [...existingWatchedList];
+    }
+    removeKey('watched');
+    let filmIndex = watchedList.indexOf(id);
+    watchedList.splice(filmIndex, 1);
+    saveKey('watched', watchedList);
+
+    textModalButtons();
+    console.log('end removeWatched');
+  }
+  // removing film ID from local storage key "queue"
+  function removeFromQueue(id) {
+    console.log('start removeFromQueue');
+    let queueList = [];
+    let existingQueueList = getKey('queue');
+    if (existingQueueList) {
+      queueList = [...existingQueueList];
+    }
+    removeKey('queue');
+    let filmIndex = queueList.indexOf(id);
+    queueList.splice(filmIndex, 1);
+    saveKey('queue', queueList);
+    textModalButtons();
+    console.log('end removeFromQueue');
   }
   // adding film ID to local storage key "queue"
   function addToQueue() {
-    const queueButton = document.querySelector('[data-add-queue]');
-    if (queueButton.classList.contains('active')) {
+    console.log('start addToQueue');
+    const queueButton = document.querySelector('.btn__queue');
+    if (queueButton.classList.contains('in-local-storage')) {
       removeFromQueue(id);
     } else {
-      let queuedList = [];
+      let queueList = [];
       let existingQueueList = getKey('queue');
       if (existingQueueList) {
-        queuedList = [...existingQueueList];
+        queueList = [...existingQueueList];
       }
       let watchedList = [];
       let existingWatchedList = getKey('watched');
@@ -131,7 +159,7 @@ async function changeWatchedQueueList(id) {
       let watchedSet = new Set(watchedList);
       if (watchedSet.has(id)) {
         removeKey('watched');
-        let filmIndex = watchedList.idIndexOf(id);
+        let filmIndex = watchedList.indexOf(id);
         watchedList.splice(filmIndex, 1);
         saveKey('watched', watchedList);
         textModalButtons(id);
@@ -142,35 +170,21 @@ async function changeWatchedQueueList(id) {
         textModalButtons(id);
       } else {
         queueList.push(id);
-        saveKey('queue', queuedList);
+        saveKey('queue', queueList);
         textModalButtons(id);
       }
     }
+    console.log('end addToQueue');
   }
-  // removing film ID from local storage key "watched"
-  function removeFromWatched(id) {
-    let watchedList = [];
-    let existingWatchedList = getKey('watched');
-    if (existingWatchedList) {
-      watchedList = [...existingWatchedList];
-    }
-    removeKey('watched');
-    let filmIndex = watchedList.idIndexOf(id);
-    watchedList.splice(filmIndex, 1);
-    saveKey('watched', watchedList);
-    textModalButtons();
+  console.log('end changeWatchedQueueList');
+}
+
+function localStorageCheck(id, key) {
+  let array = [];
+  let existingArray = getKey(key);
+  if (existingArray) {
+    array = [...existingArray];
   }
-  // removing film ID from local storage key "queue"
-  function removeFromQueue(id) {
-    let queueList = [];
-    let existingQueueList = getKey('queue');
-    if (existingWatchedList) {
-      queueList = [...existingQueueList];
-    }
-    removeKey('queue');
-    let filmIndex = queueList.idIndexOf(id);
-    queueList.splice(filmIndex, 1);
-    saveKey('queue', queueList);
-    textModalButtons();
-  }
+  const listSet = new Set(array);
+  return listSet.has(id);
 }

@@ -1,11 +1,12 @@
 import { createHtmlTags } from './fetchMovie';
-console.log("modalMovie begin file. It is before create modal window");
+import { changeWatchedQueueList, textModalButtons } from './localStorage';
+console.log('modalMovie begin file. It is before create modal window');
 
 const body = document.querySelector('body');
-const card = document.querySelector("[data-modal-open]");
-const modal = document.querySelector("[data-modal]");
+const card = document.querySelector('[data-modal-open]');
+const modal = document.querySelector('[data-modal]');
 
-if(card){
+if (card) {
   card.addEventListener('click', openModal);
 }
 
@@ -17,23 +18,24 @@ export function openModal(e) {
   body.classList.add('no-scroll');
   window.addEventListener('keydown', onEscClick);
   const id = e.target.parentElement.dataset.id;
-  createHtmlTags(id)
-  .then(el =>{
-    console.log("it is after create modal window");
-    const closeBtn = document.querySelector("[data-movie-close]");
+  createHtmlTags(id).then(() => {
+    console.log('it is after create modal window');
+    const closeBtn = document.querySelector('[data-movie-close]');
     console.log(closeBtn);
     closeBtn.addEventListener('click', closeModal);
-  })
-  console.log("modal", e.target.parentElement.className, id);
+    changeWatchedQueueList(id);
+    textModalButtons(id);
+  });
+  // console.log('modal', e.target.parentElement.className, id);
 }
 
 export function closeModal() {
-  modal.classList.toggle("is-hidden")
+  modal.classList.toggle('is-hidden');
   body.classList.remove('no-scroll');
 }
 
 function toggleModal() {
-  modal.classList.toggle("is-hidden");
+  modal.classList.toggle('is-hidden');
 }
 
 function onEscClick(event) {
