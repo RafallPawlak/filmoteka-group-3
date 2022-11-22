@@ -1,6 +1,7 @@
 const API_KEY_V3 = "bdba5342660bdd1dac5d09b885091a0c";
 const API_KEY_V4 = "";
 const API_URL = "https://api.themoviedb.org/3/";
+import symbol from '../images/svg/icons.svg';
 
 //---------------------ROUNDING METHOD--------------------------
 function roundingMethodToFirstPlace(value){
@@ -271,8 +272,7 @@ export async function createHtmlTags(result){
 
       <div class="description__text-wrapper">
         <p class="description__text">
-          <span class="vote vote--accent">${ filmDetails.vote_average }&#47;
-          <span class="vote">${ filmDetails.vote_count }</span
+          <span class="vote--accent">${roundingMethodToFirstPlace( filmDetails.vote_average) }</span>&#47;<span class="vote">${ filmDetails.vote_count }</span
           >
         </p>
         <p class="description__text description__popularity">${ filmDetails.popularity }</p>
@@ -287,7 +287,11 @@ export async function createHtmlTags(result){
       <button type="button" class="modal__btn" data-add-queue data-id="${ result }">Add to queue</button>
     </div>
   </div>
-  <button type="button" data-movie-close>Close</button>
+  <button type="button" class="modal__close" data-movie-close>
+    <svg class="modal__close-icon" width="18" height="18">
+      <use href="${symbol}#btn-mobile-menu-close"></use>
+    </svg>
+  </button>
 </div>
   `;
 

@@ -9,6 +9,8 @@ body.no-scroll {
 
 .backdrop {
   position: fixed;
+  display: flex;
+  justify-content: center;
   top: 0;
   left: 0;
   z-index: 1000;
@@ -31,15 +33,19 @@ body.no-scroll {
 
 .modal {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(1);
-  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  padding-top: 48px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 20px;
+ // transform: translate(-50%, -50%) scale(1);
+  //transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
   width: 90%;
-  height: 90%;
+  max-height: 900px;
+ margin-top: 20px;
   background-color: white;
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 2px 1px rgba(0, 0, 0, 0.2);
-  border-radius: 4px;
+  border-radius: 1px;
 }
 
 .close-modal-btn {
@@ -56,4 +62,32 @@ body.no-scroll {
   // background: #FFFFFF;
   // border: 1px solid rgba(0, 0, 0, 0.1);
   z-index: 2000;
+}
+
+@media screen and (min-width: $tablet) {
+  .modal {
+    width: 618px;
+    height: auto;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1);
+    transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-bottom: 48px;
+    
+  }
+    .backdrop {
+    padding-top: 100px;
+}
+}
+
+@media screen and (min-width: $desktop ) {
+    .modal {
+      width: 882px;
+
+  }
 }
