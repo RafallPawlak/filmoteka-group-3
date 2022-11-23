@@ -1,6 +1,3 @@
-// import { openModal } from './modalMovie';
-
-const card = document.querySelector('[data-modal-open]');
 // Saving value to the key in local storage
 const saveKey = (key, value) => {
   try {
@@ -188,3 +185,5 @@ function localStorageCheck(id, key) {
   const listSet = new Set(array);
   return listSet.has(id);
 }
+
+export { saveKey, getKey, removeKey };
