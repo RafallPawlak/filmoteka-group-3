@@ -1,9 +1,11 @@
-const refs = {
+export const refs = {
  
     openFooterModal: document.querySelector('[data-action="open-lightbox"]'),
     closeFooterModal: document.querySelector('[data-action="close-lightbox"]'),
     lightboxFooterModal: document.querySelector('.js-lightbox'),
     backdropClick: document.querySelector('.modal-background'),
+    spinnerPreloader: document.querySelector('.js-preloader-page'),
+     
 };
 
 //================================open the modal ========================================
