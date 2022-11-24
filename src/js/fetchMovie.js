@@ -3,7 +3,8 @@ const API_KEY_V4 = "";
 const API_URL = "https://api.themoviedb.org/3/";
 import symbol from '../images/svg/icons.svg';
 import Pagination from 'tui-pagination';
-import { optionsSearch } from './pagination'
+import { optionsSearch } from './pagination';
+import {removeSpinner, addSpinner } from './spinner';
 
 
 
@@ -220,6 +221,7 @@ async function fetchApiConfig(){
 // -------------------get trending films-----------------------
 export async function fetchApiTrending(page){
   try {
+    removeSpinner()
       const params = new URLSearchParams({
         api_key: API_KEY_V3,
         page: page,
@@ -265,6 +267,7 @@ export async function fetchApiTrending(page){
       `
     });
     filmsListHtml.innerHTML = filmItems;
+    addSpinner()
     return film
   } catch (error) {
     console.log("fetchApiTrending: ", error);
