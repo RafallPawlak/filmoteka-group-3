@@ -2,6 +2,11 @@ const API_KEY_V3 = "bdba5342660bdd1dac5d09b885091a0c";
 const API_KEY_V4 = "";
 const API_URL = "https://api.themoviedb.org/3/";
 import symbol from '../images/svg/icons.svg';
+import Pagination from 'tui-pagination';
+import { optionsSearch } from './pagination';
+import {removeSpinner, addSpinner } from './spinner';
+
+
 
 //---------------------ROUNDING METHOD--------------------------
 export function roundingMethodToFirstPlace(value){
@@ -14,6 +19,13 @@ export function roundingMethodToFirstPlace(value){
 const searchForm = document.getElementById("search-form");
 const filmsListHtml = document.querySelector(".grid");
 const alertNotResults = document.querySelector(".message");
+const descriptionMovie = document.querySelector('.modal');
+//----------------------------------------------------------------
+                        
+//---------------------PAGINATION---------------------------------
+
+const containerSearch = document.getElementById('pagination');
+ 
 //----------------------------------------------------------------
 
 let homePage = 1;
@@ -65,12 +77,13 @@ function pageLoadSupport(evt){
 //-----------------------------------------------------------------------------------------
 
 //--------------------------INITIAL FETCH API KEYWORD METHODE------------------------------
-async function fetchApiKeyword(){
+export async function fetchApiKeyword(page){
   try {
     let searchInputValue = searchForm.searchQuery.value.trim();
-    console.log(searchInputValue);
+    //console.log(searchInputValue);
     fetchApiConfig();
-    fetchApiKeywordBase(searchInputValue);
+    fetchApiKeywordBase(page, searchInputValue);
+    
   } catch (error) {
     console.log("fetchApiKeyword function error: ", error);
   }
@@ -78,32 +91,51 @@ async function fetchApiKeyword(){
 //-----------------------------------------------------------------------------------------
 
 //------------------USE ID AND CONFIG DATA TO GET DETAILS OF FILM--------------------------
-async function fetchApiKeywordBase(keyword){
+export async function fetchApiKeywordBase(page,keyword){
   try {
     tempImageUrl = "";
     filmItems = "";
+
     const params = new URLSearchParams({
       api_key: API_KEY_V3,
       query: keyword,
-      page: 1,
+      page: page,
     });
-    const response = await fetch(API_URL + "search/" + "keyword" + "?" + params);
+
+    const response = await fetch(API_URL + "search/movie" + "?" + params);
     const listFilms = await response.json();
-    if(listFilms.results.length===0){
-      console.log("There are not result. Function stops.");
-      alertNotResults.innerHTML = "Search result not successful. Enter the correct movie name.";
-    }else{
-      console.log("There are results. GO!");
+
+    const total_results = listFilms.total_results;
+    optionsSearch.totalItems = total_results;
+    const paginationSearch = new Pagination(containerSearch, optionsSearch);
+
+    if  (listFilms.results.length===0){
+          console.log("There are not result. Function stops.");
+          alertNotResults.innerHTML = "Search result not successful. Enter the correct movie name.";
+    } else  {
+      //console.log("There are results. GO!");
+      console.log("Current Page:", paginationSearch.getCurrentPage());
+      
+      paginationSearch.on('beforeMove', async event => {
+          const pageSearch = event.page;
+          const topPage = document.querySelector(".header");
+          paginationSearch.setTotalItems(total_results);
+          optionsSearch.page = pageSearch;
+          fetchApiKeyword(pageSearch);
+          topPage.scrollIntoView({behavior: "smooth"});
+       });
+
       alertNotResults.innerHTML = "";
       listFilms.results.forEach(result => {
         createHtmlTagsSearch(result);
       })
     }
+    return optionsSearch.totalItems;
   } catch (error) {
     console.log("fetchApiKeywordBase function error: ", error);
   }
 };
-//-----------------------------------------------------------------------------------------
+// //-----------------------------------------------------------------------------------------
 
 //-------------------------BUILD ELEMENTS OF HTML METHODE----------------------------------
 export async function createHtmlTagsSearch(result){
@@ -113,14 +145,12 @@ export async function createHtmlTagsSearch(result){
     });
     const response = await fetch(API_URL + "movie/" + result.id + "?" + params)
     const filmDetails = await response.json();
-    console.log("createHtmlTags object content:", filmDetails);
+    //console.log("createHtmlTags object content:", filmDetails);
 
     if(filmDetails.poster_path && filmDetails.genres.length>0){
       let yearWithDate = new Date(filmDetails.release_date);
       const genresArray = filmDetails.genres.map(genre => {return genre.name});
-      console.log(genresArray);
-      console.log(tempImageUrl, filmDetails.poster_path);
-
+     // console.log(genresArray);
       filmItems+=`
       <li>
         <figure class="card">
@@ -159,7 +189,7 @@ async function fetchApi(){
     fetchApiTrending(homePage)
     .then(film => {
       const filmDetailsHtml = document.querySelectorAll(".details");
-      console.log("fetchApi -> fetchApiTrending.then here forEach start to get film details with fetchApiGetDetailsFilm methode");
+     // console.log("fetchApi -> fetchApiTrending.then here forEach start to get film details with fetchApiGetDetailsFilm methode");
       filmDetailsHtml.forEach(el => {
         fetchApiGetDetailsFilm(el)
       })
@@ -179,9 +209,9 @@ async function fetchApiConfig(){
     // SPINER START
     const response = await fetch(API_URL + "configuration" + "?" + params);
     const config = await response.json();
-    console.log("fetchApiConfig object content:", config);
+    //console.log("fetchApiConfig object content:", config);
     tempImageUrl = config.images.base_url + config.images.poster_sizes[3];
-    console.log("function fetchApiConfig base url to get img:", tempImageUrl);
+    //console.log("function fetchApiConfig base url to get img:", tempImageUrl);
   } catch (error) {
     console.log("fetchApiConfig: ", error);
   }
@@ -191,15 +221,32 @@ async function fetchApiConfig(){
 // -------------------get trending films-----------------------
 export async function fetchApiTrending(page){
   try {
-    const params = new URLSearchParams({
-      api_key: API_KEY_V3,
-      page: page,
+    addSpinner()
+      const params = new URLSearchParams({
+        api_key: API_KEY_V3,
+        page: page,
     });
     const response = await fetch(API_URL + "trending/" + "movie/" + "day" + "?" + params);
     const film = await response.json();
-    // SPINER END
-    console.log("fetchApiTrending object content", film);
-    console.log("fetchApiTrending forEach start to create HTML li>img tags");
+
+    const total_results = film.total_results;
+    console.log(total_results);
+    optionsSearch.totalItems = total_results;
+   
+    const paginationSearch = new Pagination(containerSearch, optionsSearch);
+
+    //console.log("fetchApiTrending object content", film);
+    //console.log("fetchApiTrending forEach start to create HTML li>img tags");
+    paginationSearch.on('beforeMove', async event => {
+      const page = event.page;
+      const topPage = document.querySelector(".header");
+      paginationSearch.setTotalItems(total_results);
+      optionsSearch.page = page;
+      fetchApiTrending(page);
+      topPage.scrollIntoView({behavior: "smooth"});
+    });
+    
+    console.log('Total Results Trending =', film);
     filmItems = '';
     film.results.forEach(result => {
       filmItems +=`
@@ -220,6 +267,9 @@ export async function fetchApiTrending(page){
       `
     });
     filmsListHtml.innerHTML = filmItems;
+
+    removeSpinner()
+
     return film
   } catch (error) {
     console.log("fetchApiTrending: ", error);
@@ -236,10 +286,10 @@ export async function fetchApiGetDetailsFilm(elHtml){
     const response = await fetch(API_URL + "movie/" + elHtml.dataset.film_id + "?" + params)
     const filmDetails = await response.json();
 
-    console.log("fetchApiGetDetailsFilm object content:", filmDetails);
+    //console.log("fetchApiGetDetailsFilm object content:", filmDetails);
     let yearWithDate = new Date(filmDetails.release_date);
     const genresArray = filmDetails.genres.map(genre => {return genre.name});
-    console.log("genres array - result .map methode inside fetchApiGetDetailsFilm:", genresArray);
+    //console.log("genres array - result .map methode inside fetchApiGetDetailsFilm:", genresArray);
     elHtml.innerHTML = `${genresArray.join(", ")} &#124; ${yearWithDate.getFullYear()}`
   } catch (error) {
     console.log("fetchApiGetDetailsFilm: ", error);
@@ -248,7 +298,6 @@ export async function fetchApiGetDetailsFilm(elHtml){
 // ---------------------------------------------------------------------
 
 //-------------------------DESCRIPTION TEST----------------------------------------------
-const descriptionMovie = document.querySelector('.modal');
 
 export async function createHtmlTags(result){
   try {
@@ -257,13 +306,13 @@ export async function createHtmlTags(result){
     });
     const response = await fetch(API_URL + "movie/" + result + "?" + params)
     const filmDetails = await response.json();
-    console.log("createHtmlTags object content:", filmDetails);
+    //console.log("createHtmlTags object content:", filmDetails);
 
     if(filmDetails.poster_path && filmDetails.genres.length>0){
       let yearWithDate = new Date(filmDetails.release_date);
       const genresArray = filmDetails.genres.map(genre => {return genre.name});
-      console.log(genresArray);
-      console.log(tempImageUrl, filmDetails.poster_path);
+      //console.log(genresArray);
+      //console.log(tempImageUrl, filmDetails.poster_path);
 
     const  markupMovie = `
   <div class="movie__description" data-id="${ result }">
@@ -307,11 +356,10 @@ export async function createHtmlTags(result){
   `;
 
 descriptionMovie.innerHTML = markupMovie;
-
+ 
    }else{
       console.log("There are not exist poster_path and / or genres array");
     };
-
   } catch (error) {
     console.log("createHtmlTags function error: ", error);
   }
