@@ -167,7 +167,7 @@
   position: fixed;
   display: flex;
 
-  right: calc(50% - 157px);
+  right: calc(50% - 140px);
 
   width: 35px;
   height: 35px;
@@ -190,19 +190,12 @@
   background-size: 60%;
   background-repeat: no-repeat;
 
-  @media screen and (max-width: 479px) {
-    right: calc(50% - 165px);
-  }
-  @media screen and (min-width: 480px) {
-    right: calc(50% - 180px);
-  }
-
   @media screen and (min-width: $tablet) {
-    right: calc(50% - 300px);
+    right: calc(50% - 240px);
   }
 
   @media screen and (min-width: $desktop) {
-    right: calc(50% - 490px);
+    right: calc(50% - 450px);
   }
 
   &:hover,
