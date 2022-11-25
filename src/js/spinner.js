@@ -12,10 +12,10 @@ document.body.onload = () => {
 };
 
 
-  removeSpinner=()=> {
+  function removeSpinner() {
     setTimeout(preloader.classList.add('preloader-js'), 500);
   };
-  addSpinner=()=> {
+  function addSpinner() {
     preloader.classList.remove('preloader-js');
   };
   export {
