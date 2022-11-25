@@ -232,9 +232,9 @@ export async function fetchApiTrending(page){
     const total_results = film.total_results;
     console.log(total_results);
     optionsSearch.totalItems = total_results;
+   
     const paginationSearch = new Pagination(containerSearch, optionsSearch);
 
-    // SPINER END
     //console.log("fetchApiTrending object content", film);
     //console.log("fetchApiTrending forEach start to create HTML li>img tags");
     paginationSearch.on('beforeMove', async event => {
@@ -267,7 +267,9 @@ export async function fetchApiTrending(page){
       `
     });
     filmsListHtml.innerHTML = filmItems;
+
     removeSpinner()
+
     return film
   } catch (error) {
     console.log("fetchApiTrending: ", error);
@@ -354,11 +356,10 @@ export async function createHtmlTags(result){
   `;
 
 descriptionMovie.innerHTML = markupMovie;
-
+ 
    }else{
       console.log("There are not exist poster_path and / or genres array");
     };
-
   } catch (error) {
     console.log("createHtmlTags function error: ", error);
   }
