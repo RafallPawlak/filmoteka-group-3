@@ -4,7 +4,7 @@ const API_URL = "https://api.themoviedb.org/3/";
 import symbol from '../images/svg/icons.svg';
 
 //---------------------ROUNDING METHOD--------------------------
-function roundingMethodToFirstPlace(value){
+export function roundingMethodToFirstPlace(value){
   let roundingValue = Number(Math.round(value + 'e+1') + 'e-1');
   return roundingValue
 };
