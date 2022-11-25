@@ -93,6 +93,7 @@ export async function fetchApiKeyword(page){
 //------------------USE ID AND CONFIG DATA TO GET DETAILS OF FILM--------------------------
 export async function fetchApiKeywordBase(page,keyword){
   try {
+    addSpinner();
     tempImageUrl = "";
     filmItems = "";
 
@@ -130,6 +131,7 @@ export async function fetchApiKeywordBase(page,keyword){
         createHtmlTagsSearch(result);
       })
     }
+    removeSpinner();
     return optionsSearch.totalItems;
   } catch (error) {
     console.log("fetchApiKeywordBase function error: ", error);
@@ -221,7 +223,7 @@ async function fetchApiConfig(){
 // -------------------get trending films-----------------------
 export async function fetchApiTrending(page){
   try {
-    removeSpinner()
+    addSpinner();
       const params = new URLSearchParams({
         api_key: API_KEY_V3,
         page: page,
@@ -232,9 +234,9 @@ export async function fetchApiTrending(page){
     const total_results = film.total_results;
     console.log(total_results);
     optionsSearch.totalItems = total_results;
+   
     const paginationSearch = new Pagination(containerSearch, optionsSearch);
 
-    // SPINER END
     //console.log("fetchApiTrending object content", film);
     //console.log("fetchApiTrending forEach start to create HTML li>img tags");
     paginationSearch.on('beforeMove', async event => {
@@ -267,7 +269,7 @@ export async function fetchApiTrending(page){
       `
     });
     filmsListHtml.innerHTML = filmItems;
-    addSpinner()
+    removeSpinner();
     return film
   } catch (error) {
     console.log("fetchApiTrending: ", error);
@@ -354,11 +356,10 @@ export async function createHtmlTags(result){
   `;
 
 descriptionMovie.innerHTML = markupMovie;
-
+ 
    }else{
       console.log("There are not exist poster_path and / or genres array");
     };
-
   } catch (error) {
     console.log("createHtmlTags function error: ", error);
   }
