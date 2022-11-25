@@ -221,7 +221,7 @@ async function fetchApiConfig(){
 // -------------------get trending films-----------------------
 export async function fetchApiTrending(page){
   try {
-    removeSpinner()
+    addSpinner()
       const params = new URLSearchParams({
         api_key: API_KEY_V3,
         page: page,
@@ -267,7 +267,7 @@ export async function fetchApiTrending(page){
       `
     });
     filmsListHtml.innerHTML = filmItems;
-    addSpinner()
+    removeSpinner()
     return film
   } catch (error) {
     console.log("fetchApiTrending: ", error);
