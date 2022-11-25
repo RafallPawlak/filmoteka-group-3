@@ -5,7 +5,8 @@
 
 // Mobile 320-768//
 
-.grid {
+.grid,
+.library__grid {
   display: grid;
   grid-template-columns: 1fr;
   grid-gap: 10px;
@@ -15,14 +16,16 @@
 
 // Tablet 768-1024//
 @media screen and (min-width: $tablet) {
-  .grid {
+  .grid,
+  .library__grid {
     grid-template-columns: 1fr 1fr 1fr;
   }
 }
 
 // Desktop 1024+//
 @media screen and (min-width: $desktop) {
-  .grid {
+  .grid,
+  .library__grid {
     grid-template-columns: 1fr 1fr 1fr 1fr;
   }
 }

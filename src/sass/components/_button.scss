@@ -34,7 +34,8 @@
 
   &:hover,
   &:active,
-  &:focus {
+  &:focus,
+  &--active {
     background-color: $color-brand-primary;
     border: solid rgba(0, 0, 0, 0) 1px;
     box-shadow: 0px 8px 43px rgba(255, 107, 1, 0.6);

@@ -168,3 +168,5 @@ export async function changeWatchedQueueList(id) {
     textModalButtons();
   }
 }
+
+export { saveKey, getKey, removeKey };
