@@ -88,6 +88,7 @@ export async function fetchApiKeyword(page){
   try {
     let searchInputValue = searchForm.searchQuery.value.trim();
     //console.log(searchInputValue);
+    optionsSearch.page = 1;
     fetchApiConfig();
     fetchApiKeywordBase(page, searchInputValue);
     
@@ -128,7 +129,8 @@ export async function fetchApiKeywordBase(page,keyword){
           const topPage = document.querySelector(".header");
           paginationSearch.setTotalItems(total_results);
           optionsSearch.page = pageSearch;
-          fetchApiKeyword(pageSearch);
+          fetchApiConfig();
+          fetchApiKeywordBase(pageSearch,keyword);
           topPage.scrollIntoView({behavior: "smooth"});
        });
 
