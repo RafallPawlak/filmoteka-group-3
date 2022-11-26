@@ -40,9 +40,16 @@ fetchApi();
 if(searchForm){
   searchForm.addEventListener("input", cancelInputValue);
   searchForm.addEventListener("submit", pageLoadSupport);
+  searchForm.searchQuery.addEventListener("focus", removeBorderAndPlaceholder);
+  searchForm.searchQuery.addEventListener("blur", addBorderAndPlaceholder);
 }
-
-// //------------------------------------------------------------------------
+//------------------------------------------------------------------------
+function removeBorderAndPlaceholder(){
+  searchForm.searchQuery.placeholder = "";
+};
+function addBorderAndPlaceholder(){
+  searchForm.searchQuery.placeholder = "Search for a movie...";
+};
 
 
 // ====================================== HANDLING SEARCH INPUT =====BEGIN========================================
