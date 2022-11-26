@@ -108,6 +108,7 @@ export async function fetchApiKeyword(page){
 //------------------USE ID AND CONFIG DATA TO GET DETAILS OF FILM--------------------------
 export async function fetchApiKeywordBase(page,keyword){
   try {
+    addSpinner();
     tempImageUrl = "";
     filmItems = "";
 
@@ -176,6 +177,7 @@ export async function fetchApiKeywordBase(page,keyword){
       });
     filmsListHtml.innerHTML = filmItems;
     }
+    removeSpinner();
   } catch (error) {
     console.log("fetchApiKeywordBase function error: ", error);
   }
@@ -319,9 +321,7 @@ export async function fetchApiTrending(page){
       `
     });
     filmsListHtml.innerHTML = filmItems;
-    removeSpinner()
-
-    return film
+    removeSpinner();
   } catch (error) {
     console.log("fetchApiTrending: ", error);
   }
