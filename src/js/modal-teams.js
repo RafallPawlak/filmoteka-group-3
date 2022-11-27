@@ -14,7 +14,7 @@ export default [
         description: 'photo Jacek Pietrzak',
         name: 'Jacek Pietrzak',
         mailto:'jacekpietrzak@me.com',
-        linkedin: 'https://www.linkedin.com/in/rafa%C5%82-pawlak-904665252/',
+        linkedin: 'https://www.linkedin.com/in/pietrzakjacek/',
         github: 'https://github.com/jacekpietrzak',
     },
     {
@@ -30,6 +30,7 @@ export default [
         h2: 'Developer',
         preview: '',
         description: 'photo Tomasz Bielecki',
+        mailto:'tomasz.bielecki@ledview.pl',
         name: 'Tomasz Bielecki',
         linkedin: 'https://www.linkedin.com/in/tomasz-bielecki-109035201',
         github: 'https://github.com/831230',
