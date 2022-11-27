@@ -18,7 +18,7 @@
 @media screen and (min-width: $tablet) {
   .grid,
   .library__grid {
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
   }
 }
 
@@ -26,6 +26,6 @@
 @media screen and (min-width: $desktop) {
   .grid,
   .library__grid {
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
   }
 }
