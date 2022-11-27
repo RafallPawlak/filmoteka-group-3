@@ -145,7 +145,7 @@ export async function fetchApiKeywordBase(page,keyword){
       alertNotResults.innerHTML = "";
     
       listFilms.results.forEach(result => {
-        if (result.poster_path === null) {
+        if (result.poster_path & result.genre_ids.length === null) {
           return;
         } else {
           filmItems += `
@@ -222,7 +222,6 @@ export async function fetchApiTrending(page){
     });
     const response = await fetch(API_URL + "trending/" + "movie/" + "day" + "?" + params);
     const film = await response.json();
-
     const total_results = film.total_results;
     optionsSearch.totalItems = total_results;
    
@@ -245,7 +244,7 @@ export async function fetchApiTrending(page){
 
     filmItems = '';
     film.results.forEach(result => {
-      if (result.poster_path === null) {
+      if (result.poster_path & result.genre_ids.length === null) {
         return;
       } else {
         filmItems += `
