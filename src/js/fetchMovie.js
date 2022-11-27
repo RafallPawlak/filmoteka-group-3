@@ -146,7 +146,7 @@ export async function fetchApiKeywordBase(page,keyword){
     
       listFilms.results.forEach(result => {
         if (result.poster_path === null) {
-          
+          return;
         } else {
           filmItems += `
       <li>
@@ -181,8 +181,8 @@ export async function fetchApiKeywordBase(page,keyword){
 async function fetchApi(page){
   try {
     optionsSearch.page = 1;
-    fetchApiConfig();
-    fetchApiTrending(homePage)
+    await fetchApiConfig();
+    await fetchApiTrending(homePage)
       .then(film => {
           const filmDetailsHtml = document.querySelectorAll(".details");
           filmDetailsHtml.forEach(el => {
@@ -245,7 +245,10 @@ export async function fetchApiTrending(page){
 
     filmItems = '';
     film.results.forEach(result => {
-      filmItems +=`
+      if (result.poster_path === null) {
+        return;
+      } else {
+        filmItems += `
       <li>
         <figure class="card">
           <div class="thumb"  data-id="${result.id}">
@@ -261,7 +264,8 @@ export async function fetchApiTrending(page){
         </figure>
       </li>
       `
-    });
+      }
+});
     filmsListHtml.innerHTML = filmItems;
     removeSpinner();
   } catch (error) {
