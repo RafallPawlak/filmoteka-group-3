@@ -4,8 +4,8 @@ import { roundingMethodToFirstPlace } from './fetchMovie';
 
 const libraryGrid = document.querySelector('.library__grid');
 const libraryInfo = document.querySelector('.filmless');
-const btnLibWatched = document.querySelector('.btn__lib__watched');
-const btnLibQueue = document.querySelector('.btn__lib__queue');
+export const btnLibWatched = document.querySelector('.btn__lib__watched');
+export const btnLibQueue = document.querySelector('.btn__lib__queue');
 // const library = document.querySelector('.library');
 
 showFullLibrary();
@@ -13,7 +13,7 @@ btnLibWatched.addEventListener('click', showWatched);
 btnLibQueue.addEventListener('click', showQueue);
 
 // showing full films list of both lists (queue and watched)
-function showFullLibrary() {
+export function showFullLibrary() {
   libraryGrid.innerHTML = '';
   libraryInfo.innerHTML = '';
 
@@ -67,7 +67,7 @@ function showFullLibrary() {
   }
 }
 
-function showWatched() {
+export function showWatched() {
   libraryGrid.innerHTML = '';
   libraryInfo.innerHTML = '';
 
@@ -116,7 +116,7 @@ function showWatched() {
   }
 }
 
-function showQueue() {
+export function showQueue() {
   libraryGrid.innerHTML = '';
   libraryInfo.innerHTML = '';
 
