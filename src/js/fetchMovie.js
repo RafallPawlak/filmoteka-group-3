@@ -7,7 +7,7 @@ import { optionsSearch } from './pagination';
 import {removeSpinner, addSpinner } from './spinner';
 
 //---------------------ROUNDING METHOD--------------------------
-function roundingMethodToFirstPlace(value) {
+export function roundingMethodToFirstPlace(value) {
   let roundingValue = Number(Math.round(value + 'e+1') + 'e-1');
 return roundingValue
 };
