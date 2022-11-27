@@ -33,6 +33,8 @@ export function showFullLibrary() {
       <button class="modal__btn filmless__button" onclick="location.href='https://rafallpawlak.github.io/filmoteka-group-3/'" type="button">LET'S GO</button>`;
     libraryInfo.insertAdjacentHTML('beforeend', noLibraryMarkup);
   } else {
+    const mainLibraryTitle = `<h2 class="filmless__title">Your full library:<h2>`;
+    libraryInfo.insertAdjacentHTML('beforeend', mainLibraryTitle);
     for (let id of fullIdList) {
       fetchApiById(id).then(data => {
         let yearWithDate = new Date(data.release_date);

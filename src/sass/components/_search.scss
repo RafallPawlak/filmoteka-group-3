@@ -11,6 +11,9 @@
     align-items: center;
     border-bottom: solid 1px $color-brand-secondary;
     position: relative;
+    &:hover {
+      box-shadow: 0px 0px 2px 2px rgba(255, 107, 1, 1);
+    }
   }
   &__input {
     font-size: 14px;
@@ -22,6 +25,7 @@
     background-color: transparent;
     border: none;
     outline: none;
+    padding: 10px;
     // border-bottom: solid 1px $color-brand-secondary;
 
     &::placeholder {
@@ -43,9 +47,14 @@
 
   &__btn {
     position: absolute;
-    right: 0;
+    right: 5px;
     background-color: transparent;
     border: none;
+    cursor: pointer;
+    transition: transform 330ms ease-in-out;
+    &:hover {
+      transform: scale(2);
+    }
   }
   &__icon {
     width: 12px;
