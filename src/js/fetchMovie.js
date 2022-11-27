@@ -232,6 +232,7 @@ export async function fetchApiKeywordBase(page,keyword){
 //-------------------------------------MAIN METHODE----------------------------------------
 async function fetchApi(page){
   try {
+    optionsSearch.page = 1;
     fetchApiConfig();
     fetchApiTrending(homePage)
     .then(film => {
