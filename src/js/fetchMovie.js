@@ -6,12 +6,10 @@ import Pagination from 'tui-pagination';
 import { optionsSearch } from './pagination';
 import {removeSpinner, addSpinner } from './spinner';
 
-
-
 //---------------------ROUNDING METHOD--------------------------
-export function roundingMethodToFirstPlace(value){
+function roundingMethodToFirstPlace(value) {
   let roundingValue = Number(Math.round(value + 'e+1') + 'e-1');
-  return roundingValue
+return roundingValue
 };
 //--------------------------------------------------------------
 
@@ -71,7 +69,6 @@ function cancelInputValue(e){
 //---------------------REACTION ON SUBMIT OF SEARCH INPUT METHODE--------------------------
 function pageLoadSupport(evt){
   evt.preventDefault()
-  console.log("pageLoadSupport function");
   if(!searchForm.searchQuery.value){
     console.log("pageLoadSupport function. Input value was deleted so fetchApi function start load the most popular films");
     fetchApi()
@@ -87,15 +84,14 @@ function pageLoadSupport(evt){
 export async function fetchApiKeyword(page){
   try {
     let searchInputValue = searchForm.searchQuery.value.trim();
-    //console.log(searchInputValue);
     optionsSearch.page = 1;
     fetchApiConfig();
     fetchApiKeywordBase(page, searchInputValue)
       .then(film => {
-      const filmDetailsHtml = document.querySelectorAll(".details");
-     // console.log("fetchApi -> fetchApiTrending.then here forEach start to get film details with fetchApiGetDetailsFilm methode");
-      filmDetailsHtml.forEach(el => {
-        fetchApiGetDetailsFilm(el)
+          const filmDetailsHtml = document.querySelectorAll(".details");
+          // console.log("fetchApi -> fetchApiTrending.then here forEach start to get film details with fetchApiGetDetailsFilm methode");
+          filmDetailsHtml.forEach(el => {
+          fetchApiGetDetailsFilm(el)
       })
     });;
     
@@ -129,30 +125,25 @@ export async function fetchApiKeywordBase(page,keyword){
           console.log("There are not result. Function stops.");
           alertNotResults.innerHTML = "Search result not successful. Enter the correct movie name.";
     } else  {
-      //console.log("There are results. GO!");
-      console.log("Current Page:", paginationSearch.getCurrentPage());
-      
       paginationSearch.on('beforeMove', async event => {
           const pageSearch = event.page;
           const topPage = document.querySelector(".header");
           paginationSearch.setTotalItems(total_results);
           optionsSearch.page = pageSearch;
+        
           fetchApiConfig();
-        fetchApiKeywordBase(pageSearch, keyword)
-          .then(film => {
-      const filmDetailsHtml = document.querySelectorAll(".details");
-     // console.log("fetchApi -> fetchApiTrending.then here forEach start to get film details with fetchApiGetDetailsFilm methode");
-      filmDetailsHtml.forEach(el => {
-        fetchApiGetDetailsFilm(el)
-      })
-    });;
+          fetchApiKeywordBase(pageSearch, keyword)
+            .then(film => {
+              const filmDetailsHtml = document.querySelectorAll(".details");
+              filmDetailsHtml.forEach(el => {
+                fetchApiGetDetailsFilm(el)
+          })
+      });;
           topPage.scrollIntoView({behavior: "smooth"});
        });
 
       alertNotResults.innerHTML = "";
-      // listFilms.results.forEach(result => {
-      //   createHtmlTagsSearch(result);
-      // })
+    
       listFilms.results.forEach(result => {
         if (result.poster_path === null) {
           
@@ -182,64 +173,20 @@ export async function fetchApiKeywordBase(page,keyword){
     console.log("fetchApiKeywordBase function error: ", error);
   }
 };
-// //-----------------------------------------------------------------------------------------
-
-//-------------------------BUILD ELEMENTS OF HTML METHODE----------------------------------
-// export async function createHtmlTagsSearch(result){
-//   try {
-//     const params = new URLSearchParams({
-//       api_key: API_KEY_V3
-//     });
-//     const response = await fetch(API_URL + "movie/" + result.id + "?" + params)
-//     const filmDetails = await response.json();
-//     //console.log("createHtmlTags object content:", filmDetails);
-
-//     if(filmDetails.poster_path && filmDetails.genres.length>0){
-//       let yearWithDate = new Date(filmDetails.release_date);
-//       const genresArray = filmDetails.genres.map(genre => {return genre.name});
-//      // console.log(genresArray);
-//       filmItems+=`
-//       <li>
-//         <figure class="card">
-//           <div class="thumb">
-//             <img class="img" src="${tempImageUrl}${filmDetails.poster_path}" />
-//           </div>
-//           <figcaption>
-//             <h3 class="title">${filmDetails.title}</h3>
-//             <div class="details-wrapper">
-//               <p class="details" data-film_id="${filmDetails.id}">${genresArray.join(", ")} &#124; ${yearWithDate.getFullYear()}</p>
-//               <div class="rating rating--visible">${roundingMethodToFirstPlace(filmDetails.vote_average)}</div>
-//             </div>
-//           </figcaption>
-//         </figure>
-//       </li>
-//       `
-//       filmsListHtml.innerHTML = filmItems;
-//     }else{
-//       console.log("There are not exist poster_path and / or genres array");
-//     };
-
-//   } catch (error) {
-//     console.log("createHtmlTags function error: ", error);
-//   }
-// };
 //-----------------------------------------------------------------------------------------
-// ====================================== HANDLING SEARCH INPUT =====END========================================
-
-
 
 // ====================================== HANDLING LOADING TRENDING FILMS ===BEGIN========================================
+
 //-------------------------------------MAIN METHODE----------------------------------------
 async function fetchApi(page){
   try {
     optionsSearch.page = 1;
     fetchApiConfig();
     fetchApiTrending(homePage)
-    .then(film => {
-      const filmDetailsHtml = document.querySelectorAll(".details");
-     // console.log("fetchApi -> fetchApiTrending.then here forEach start to get film details with fetchApiGetDetailsFilm methode");
-      filmDetailsHtml.forEach(el => {
-        fetchApiGetDetailsFilm(el)
+      .then(film => {
+          const filmDetailsHtml = document.querySelectorAll(".details");
+          filmDetailsHtml.forEach(el => {
+          fetchApiGetDetailsFilm(el)
       })
     })
   } catch (error) {
@@ -254,7 +201,6 @@ async function fetchApiConfig(){
     const params = new URLSearchParams({
       api_key: API_KEY_V3
     });
-    // SPINER START
     const response = await fetch(API_URL + "configuration" + "?" + params);
     const config = await response.json();
     //console.log("fetchApiConfig object content:", config);
@@ -278,30 +224,25 @@ export async function fetchApiTrending(page){
     const film = await response.json();
 
     const total_results = film.total_results;
-    console.log(total_results);
     optionsSearch.totalItems = total_results;
    
     const paginationSearch = new Pagination(containerSearch, optionsSearch);
 
-    //console.log("fetchApiTrending object content", film);
-    //console.log("fetchApiTrending forEach stasrt to create HTML li>img tags");
     paginationSearch.on('beforeMove', async event => {
       const page = event.page;
       const topPage = document.querySelector(".header");
       paginationSearch.setTotalItems(total_results);
       optionsSearch.page = page;
       fetchApiTrending(page)
-      .then(film => {
-      const filmDetailsHtml = document.querySelectorAll(".details");
-     // console.log("fetchApi -> fetchApiTrending.then here forEach start to get film details with fetchApiGetDetailsFilm methode");
-      filmDetailsHtml.forEach(el => {
-        fetchApiGetDetailsFilm(el)
+        .then(film => {
+          const filmDetailsHtml = document.querySelectorAll(".details");
+          filmDetailsHtml.forEach(el => {
+            fetchApiGetDetailsFilm(el)
       })
     });
       topPage.scrollIntoView({behavior: "smooth"});
     });
-    
-    console.log('Total Results Trending =', film);
+
     filmItems = '';
     film.results.forEach(result => {
       filmItems +=`
@@ -349,9 +290,9 @@ export async function fetchApiGetDetailsFilm(elHtml){
 };
 // ---------------------------------------------------------------------
 
-//-------------------------DESCRIPTION TEST----------------------------------------------
+//-------------------------DESCRIPTION MOVIE----------------------------------------------
 
-export async function createHtmlTags(result){
+export async function descriptionTagMovie(result){
   try {
     const params = new URLSearchParams({
       api_key: API_KEY_V3

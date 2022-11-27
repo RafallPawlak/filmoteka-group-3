@@ -1,4 +1,4 @@
-import { createHtmlTags } from './fetchMovie';
+import {  descriptionTagMovie } from './fetchMovie';
 import { changeWatchedQueueList, textModalButtons } from './localStorage';
 console.log('modalMovie begin file. It is before create modal window');
 
@@ -18,7 +18,7 @@ export function openModal(e) {
   body.classList.add('no-scroll');
   window.addEventListener('keydown', onEscClick);
   const id = e.target.parentElement.dataset.id;
-  createHtmlTags(id).then(() => {
+   descriptionTagMovie(id).then(() => {
     console.log('it is after create modal window');
     const closeBtn = document.querySelector('[data-movie-close]');
     console.log(closeBtn);
