@@ -1,11 +1,11 @@
 Team project GoIT Filmnoteka by Group 3 :
 
-  Agnieszka Szymańska-Olejniczak,
+      Agnieszka Szymańska-Olejniczak,
  
-  Paweł Adamczuk,
+      Paweł Adamczuk,
   
-  Tomasz Bielecki,
+      Tomasz Bielecki,
   
-  Jacek Pietrzak,
+      Jacek Pietrzak,
   
-  Rafał Pawlak
+      Rafał Pawlak
