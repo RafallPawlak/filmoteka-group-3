@@ -10,6 +10,15 @@
     fill: none;
     height: 24px;
     width: 24px;
+    stroke: #818181;
+
+    // transition: stroke $transition, color $transition;
+
+    // &:hover,
+    // &:active,
+    // &:focus {
+    //   stroke: $color-brand-primary;
+    // }
   }
 
   &__text {
@@ -25,6 +34,7 @@
     justify-content: flex-start;
     align-items: center;
     gap: 12px;
+
     &__text {
       display: inline-block;
       color: $color-brand-secondary;
@@ -32,6 +42,14 @@
       font-weight: 500;
       font-size: 30px;
       line-height: 35px;
+
+      transition: color $transition;
+
+      &:hover,
+      &:active,
+      &:focus {
+        color: $color-brand-primary;
+      }
     }
   }
 }
