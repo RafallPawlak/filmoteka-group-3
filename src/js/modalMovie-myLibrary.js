@@ -12,7 +12,7 @@ import {
 const body = document.querySelector('body');
 const card = document.querySelector('[data-modal-open]');
 const modal = document.querySelector('[data-modal]');
-//const backdrop = document.querySelector('.backdrop');
+const backdrop = document.querySelector('.backdrop');
 
 if (card) {
   card.addEventListener('click', openModal);
@@ -69,8 +69,8 @@ function loadLibraryListOnModalClose() {
   }
 }
 
-// backdrop.addEventListener('click', (e) => {
-//   if (e.target.className === 'backdrop') {
-//     closeModal();
-//   }
-// });
+backdrop.addEventListener('click', (e) => {
+  if (e.target.className === 'backdrop') {
+    closeModal();
+  }
+});

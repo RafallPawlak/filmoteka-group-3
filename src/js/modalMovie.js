@@ -43,8 +43,8 @@ function onEscClick(event) {
   }
 }
 
-// backdrop.addEventListener('click', (e) => {
-//   if (e.target.className === 'backdrop') {
-//     closeModal();
-//   }
-// });
+backdrop.addEventListener('click', (e) => {
+  if (e.target.className === 'backdrop') {
+    closeModal();
+  }
+});
