@@ -5,7 +5,6 @@ import symbol from '../images/svg/icons.svg';
 import Pagination from 'tui-pagination';
 import { optionsSearch } from './pagination';
 import { removeSpinner, addSpinner } from './spinner';
-import { closeModal } from './modalMovie';
 
 //---------------------ROUNDING METHOD--------------------------
 export function roundingMethodToFirstPlace(value) {
@@ -56,9 +55,9 @@ function addBorderAndPlaceholder(){
 //---------------------REACTION ON EMPTY VALUE OF SEARCH INPUT METHODE (input)--------------------------
 function cancelInputValue(e){
   e.preventDefault();
-  console.log("cancelInputValue function do nothing because input value is true");
+  //console.log("cancelInputValue function do nothing because input value is true");
   if(!e.target.value){
-    console.log("cancelInputValue function. Input value was deleted so fetchApi function start load the most popular films");
+   // console.log("cancelInputValue function. Input value was deleted so fetchApi function start load the most popular films");
     alertNotResults.innerHTML = "";
     tempImageUrl = "";
     filmItems = "";
@@ -71,11 +70,11 @@ function cancelInputValue(e){
 function pageLoadSupport(evt){
   evt.preventDefault()
   if(!searchForm.searchQuery.value){
-    console.log("pageLoadSupport function. Input value was deleted so fetchApi function start load the most popular films");
+   // console.log("pageLoadSupport function. Input value was deleted so fetchApi function start load the most popular films");
     fetchApi()
   }else{
     filmsListHtml.innerHTML = "";
-    console.log("start search results by fetchApi function");
+   // console.log("start search results by fetchApi function");
     fetchApiKeyword();
   }
 };
@@ -355,7 +354,7 @@ export async function descriptionTagMovie(result){
 descriptionMovie.innerHTML = markupMovie;
  
    }else{
-      console.log("There are not exist poster_path and / or genres array");
+      //console.log("There are not exist poster_path and / or genres array");
     };
   } catch (error) {
     console.log("createHtmlTags function error: ", error);

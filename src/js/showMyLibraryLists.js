@@ -6,7 +6,7 @@ const libraryGrid = document.querySelector('.library__grid');
 const libraryInfo = document.querySelector('.filmless');
 export const btnLibWatched = document.querySelector('.btn__lib__watched');
 export const btnLibQueue = document.querySelector('.btn__lib__queue');
-// const library = document.querySelector('.library');
+const library = document.querySelector('.library');
 
 showFullLibrary();
 btnLibWatched.addEventListener('click', showWatched);

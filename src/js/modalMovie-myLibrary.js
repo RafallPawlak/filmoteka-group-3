@@ -7,11 +7,12 @@ import {
   btnLibWatched,
   btnLibQueue,
 } from './showMyLibraryLists';
-console.log('modalMovie begin file. It is before create modal window');
+//console.log('modalMovie begin file. It is before create modal window');
 
 const body = document.querySelector('body');
 const card = document.querySelector('[data-modal-open]');
 const modal = document.querySelector('[data-modal]');
+//const backdrop = document.querySelector('.backdrop');
 
 if (card) {
   card.addEventListener('click', openModal);
@@ -26,9 +27,9 @@ export function openModal(e) {
   window.addEventListener('keydown', onEscClick);
   const id = e.target.parentElement.dataset.id;
   descriptionTagMovie(id).then(() => {
-    console.log('it is after create modal window');
+    //console.log('it is after create modal window');
     const closeBtn = document.querySelector('[data-movie-close]');
-    console.log(closeBtn);
+    //console.log(closeBtn);
     closeBtn.addEventListener('click', closeModal);
     closeBtn.addEventListener('click', loadLibraryListOnModalClose);
     changeWatchedQueueList(id);
@@ -67,3 +68,9 @@ function loadLibraryListOnModalClose() {
     showQueue();
   }
 }
+
+// backdrop.addEventListener('click', (e) => {
+//   if (e.target.className === 'backdrop') {
+//     closeModal();
+//   }
+// });
