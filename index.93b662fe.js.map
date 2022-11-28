@@ -1,1 +1,0 @@
-{"mappings":"gfAAAA,EAAA,S","sources":["src/index.js"],"sourcesContent":["import './js/fetchMovie';\nimport './js/pagination';\nimport './js/modal-footer';\nimport './js/modal-teams';\n//import \"./js/descriptionMovie\";\nimport './js/modalMovie';\nimport './js/localStorage';\n\n\n"],"names":["parcelRequire"],"version":3,"file":"index.93b662fe.js.map"}
