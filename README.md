@@ -1,4 +1,4 @@
-Team project GoIT Filmnoteka by Group 3 :
+Team project GoIT Filmoteka by Group 3 :
 
       Agnieszka Szymańska-Olejniczak,
  
