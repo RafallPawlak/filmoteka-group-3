@@ -1,6 +1,6 @@
 
 export  const optionsSearch = { 
-        totalItems: 1000,
+        totalItems: 100,
         itemsPerPage: 20,
         visiblePages: 5,
         page: 1,

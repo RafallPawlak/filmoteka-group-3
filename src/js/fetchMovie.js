@@ -135,7 +135,7 @@ export async function fetchApiKeywordBase(page,keyword){
       alertNotResults.innerHTML = "";
     
       listFilms.results.forEach(result => {
-        if (result.poster_path & result.genre_ids.length === null) {
+        if (result.poster_path === null) {
           return;
         } else {
           filmItems += `
@@ -231,7 +231,8 @@ export async function fetchApiTrending(page){
 
     filmItems = '';
     film.results.forEach(result => {
-      if (result.poster_path & result.genre_ids.length === null) {
+      if (result.poster_path === null) {
+       // && result.genre_ids.length
         return;
       } else {
         filmItems += `
@@ -270,8 +271,9 @@ export async function fetchApiGetDetailsFilm(elHtml){
     const filmDetails = await response.json();
 
     let yearWithDate = new Date(filmDetails.release_date);
-    const genresArray = filmDetails.genres.map(genre => {return genre.name});
-    elHtml.innerHTML = `${genresArray.join(", ")} &#124; ${yearWithDate.getFullYear()}`
+    const genresArray = filmDetails.genres.map(genre => { return genre.name });
+    elHtml.innerHTML = `${genresArray.join(", ")} &#124; ${yearWithDate.getFullYear()}`;
+    
   } catch (error) {
       console.log("fetchApiGetDetailsFilm: ", error);
   }
@@ -335,7 +337,7 @@ export async function descriptionTagMovie(result){
 descriptionMovie.innerHTML = markupMovie;
  
    }else{
-      return;
+      
     };
   } catch (error) {
     console.log("createHtmlTags function error: ", error);
