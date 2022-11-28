@@ -18,21 +18,16 @@ const searchForm = document.getElementById("search-form");
 const filmsListHtml = document.querySelector(".grid");
 const alertNotResults = document.querySelector(".message");
 const descriptionMovie = document.querySelector('.modal');
+const containerSearch = document.getElementById('pagination');
 //----------------------------------------------------------------
                         
-//---------------------PAGINATION---------------------------------
-
-const containerSearch = document.getElementById('pagination');
- 
-//----------------------------------------------------------------
-
 let homePage = 1;
 let tempImageUrl = "";
 let filmItems = "";
 
-//---------------------LOAD TRENDING FILMS--------------------------
+//---------------------LOAD TRENDING FILMS-------------------------------
+
 fetchApi();
-//------------------------------------------------------------------
 
 //---------------------LISTENERS TO SEARCH INPUT--------------------------
 if(searchForm){
@@ -50,37 +45,34 @@ function addBorderAndPlaceholder(){
 };
 
 
-// ====================================== HANDLING SEARCH INPUT =====BEGIN========================================
+// ====================================== HANDLING SEARCH INPUT ========================================
 
 //---------------------REACTION ON EMPTY VALUE OF SEARCH INPUT METHODE (input)--------------------------
+
 function cancelInputValue(e){
   e.preventDefault();
-  //console.log("cancelInputValue function do nothing because input value is true");
   if(!e.target.value){
-   // console.log("cancelInputValue function. Input value was deleted so fetchApi function start load the most popular films");
     alertNotResults.innerHTML = "";
     tempImageUrl = "";
     filmItems = "";
     fetchApi()
   }
 };
-//----------------------------------------------------------------------------------------------
 
 //---------------------REACTION ON SUBMIT OF SEARCH INPUT METHODE--------------------------
+
 function pageLoadSupport(evt){
   evt.preventDefault()
   if(!searchForm.searchQuery.value){
-   // console.log("pageLoadSupport function. Input value was deleted so fetchApi function start load the most popular films");
     fetchApi()
   }else{
     filmsListHtml.innerHTML = "";
-   // console.log("start search results by fetchApi function");
     fetchApiKeyword();
   }
 };
-//-----------------------------------------------------------------------------------------
 
 //--------------------------INITIAL FETCH API KEYWORD METHODE------------------------------
+
 export async function fetchApiKeyword(page){
   try {
     let searchInputValue = searchForm.searchQuery.value.trim();
@@ -89,19 +81,18 @@ export async function fetchApiKeyword(page){
     fetchApiKeywordBase(page, searchInputValue)
       .then(film => {
           const filmDetailsHtml = document.querySelectorAll(".details");
-          // console.log("fetchApi -> fetchApiTrending.then here forEach start to get film details with fetchApiGetDetailsFilm methode");
           filmDetailsHtml.forEach(el => {
           fetchApiGetDetailsFilm(el)
       })
     });;
     
   } catch (error) {
-    console.log("fetchApiKeyword function error: ", error);
+      console.log("fetchApiKeyword function error: ", error);
   }
 };
-//-----------------------------------------------------------------------------------------
 
 //------------------USE ID AND CONFIG DATA TO GET DETAILS OF FILM--------------------------
+
 export async function fetchApiKeywordBase(page,keyword){
   try {
     addSpinner();
@@ -122,7 +113,6 @@ export async function fetchApiKeywordBase(page,keyword){
     const paginationSearch = new Pagination(containerSearch, optionsSearch);
 
     if  (listFilms.results.length===0){
-          console.log("There are not result. Function stops.");
           alertNotResults.innerHTML = "Search result not successful. Enter the correct movie name.";
     } else  {
       paginationSearch.on('beforeMove', async event => {
@@ -170,12 +160,11 @@ export async function fetchApiKeywordBase(page,keyword){
     }
     removeSpinner();
   } catch (error) {
-    console.log("fetchApiKeywordBase function error: ", error);
+      console.log("fetchApiKeywordBase function error: ", error);
   }
 };
-//-----------------------------------------------------------------------------------------
 
-// ====================================== HANDLING LOADING TRENDING FILMS ===BEGIN========================================
+// ========================== HANDLING LOADING TRENDING FILMS =====================================
 
 //-------------------------------------MAIN METHODE----------------------------------------
 async function fetchApi(page){
@@ -193,9 +182,9 @@ async function fetchApi(page){
     console.log("fetchApi: ", error);
   }
 };
-//-----------------------------------------------------------------------------------------
 
 // ------------------get base part image link methode---------------------
+
 async function fetchApiConfig(){
   try {
     const params = new URLSearchParams({
@@ -203,16 +192,14 @@ async function fetchApiConfig(){
     });
     const response = await fetch(API_URL + "configuration" + "?" + params);
     const config = await response.json();
-    //console.log("fetchApiConfig object content:", config);
     tempImageUrl = config.images.base_url + config.images.poster_sizes[3];
-    //console.log("function fetchApiConfig base url to get img:", tempImageUrl);
   } catch (error) {
-    console.log("fetchApiConfig: ", error);
+      console.log("fetchApiConfig: ", error);
   }
 };
-// ------------------------------------------------------------
 
-// -------------------get trending films-----------------------
+// -------------------get trending films-----------------------------------
+
 export async function fetchApiTrending(page){
   try {
     addSpinner()
@@ -268,12 +255,12 @@ export async function fetchApiTrending(page){
     filmsListHtml.innerHTML = filmItems;
     removeSpinner();
   } catch (error) {
-    console.log("fetchApiTrending: ", error);
+      console.log("fetchApiTrending: ", error);
   }
 };
-// ---------------------------------------------------------------------
 
 // --------------------get genres and year methode----------------------
+
 export async function fetchApiGetDetailsFilm(elHtml){
   try {
     const params = new URLSearchParams({
@@ -282,16 +269,13 @@ export async function fetchApiGetDetailsFilm(elHtml){
     const response = await fetch(API_URL + "movie/" + elHtml.dataset.film_id + "?" + params)
     const filmDetails = await response.json();
 
-    //console.log("fetchApiGetDetailsFilm object content:", filmDetails);
     let yearWithDate = new Date(filmDetails.release_date);
     const genresArray = filmDetails.genres.map(genre => {return genre.name});
-    //console.log("genres array - result .map methode inside fetchApiGetDetailsFilm:", genresArray);
     elHtml.innerHTML = `${genresArray.join(", ")} &#124; ${yearWithDate.getFullYear()}`
   } catch (error) {
-    console.log("fetchApiGetDetailsFilm: ", error);
+      console.log("fetchApiGetDetailsFilm: ", error);
   }
 };
-// ---------------------------------------------------------------------
 
 //-------------------------DESCRIPTION MOVIE----------------------------------------------
 
@@ -302,13 +286,10 @@ export async function descriptionTagMovie(result){
     });
     const response = await fetch(API_URL + "movie/" + result + "?" + params)
     const filmDetails = await response.json();
-    //console.log("createHtmlTags object content:", filmDetails);
 
     if(filmDetails.poster_path && filmDetails.genres.length>0){
       let yearWithDate = new Date(filmDetails.release_date);
       const genresArray = filmDetails.genres.map(genre => {return genre.name});
-      //console.log(genresArray);
-      //console.log(tempImageUrl, filmDetails.poster_path);
 
     const  markupMovie = `
   <div class="movie__description" data-id="${ result }">
@@ -354,7 +335,7 @@ export async function descriptionTagMovie(result){
 descriptionMovie.innerHTML = markupMovie;
  
    }else{
-      //console.log("There are not exist poster_path and / or genres array");
+      return;
     };
   } catch (error) {
     console.log("createHtmlTags function error: ", error);

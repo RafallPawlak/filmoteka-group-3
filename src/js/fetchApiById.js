@@ -8,9 +8,8 @@ export async function fetchApiById(idValue) {
     });
     const response = await fetch(API_URL + 'movie/' + idValue + '?' + params);
     const films = await response.json();
-    //console.log(films);
     return films;
   } catch (error) {
-    console.log('fetchApiById: ', error);
+      console.log('fetchApiById: ', error);
   }
 }

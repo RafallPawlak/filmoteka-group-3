@@ -12,7 +12,6 @@ showFullLibrary();
 btnLibWatched.addEventListener('click', showWatched);
 btnLibQueue.addEventListener('click', showQueue);
 
-// showing full films list of both lists (queue and watched)
 export function showFullLibrary() {
   libraryGrid.innerHTML = '';
   libraryInfo.innerHTML = '';
