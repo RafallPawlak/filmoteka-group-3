@@ -9,11 +9,16 @@
   &__form {
     display: flex;
     align-items: center;
-    border-bottom: solid 1px $color-brand-secondary;
+    // border-bottom: solid 1px $color-brand-secondary;
     position: relative;
-    &:hover {
-      box-shadow: 0px 0px 2px 2px rgba(255, 107, 1, 1);
-    }
+    transition: border $transition;
+
+    // &:hover,
+    // &:active,
+    // &:focus {
+    //   border-bottom: solid 1px $color-brand-primary;
+    //   // box-shadow: 0px 0px 2px 2px rgba(255, 107, 1, 1);
+    // }
   }
   &__input {
     width: 100%;
@@ -24,10 +29,20 @@
     color: $color-brand-secondary;
     padding: 4px 16px 4px 0;
     background-color: transparent;
+
     border: none;
+    border-bottom: solid 1px $color-brand-secondary;
+
     outline: none;
     padding: 10px 25px 10px 10px;
     // border-bottom: solid 1px $color-brand-secondary;
+    transition: border $transition;
+    &:hover,
+    &:active,
+    &:focus {
+      border-bottom: solid 1px $color-brand-primary;
+      // box-shadow: 0px 0px 2px 2px rgba(255, 107, 1, 1);
+    }
 
     &::placeholder {
       /* Chrome, Firefox, Opera, Safari 10.1+ */
@@ -52,16 +67,22 @@
     background-color: transparent;
     border: none;
     cursor: pointer;
-    transition: transform 330ms ease-in-out;
-    &:hover {
-      transform: scale(2);
-    }
+    // transition: transform $transition;
+    // &:hover {
+    //   transform: scale(1.5);
+    // }
   }
   &__icon {
     width: 12px;
     height: 12px;
     stroke: #fff;
     fill: none;
+    transition: stroke $transition, transform $transition;
+
+    &:hover {
+      stroke: $color-brand-primary;
+      transform: scale(1.5);
+    }
   }
 }
 
