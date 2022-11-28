@@ -1,10 +1,10 @@
 import {  descriptionTagMovie } from './fetchMovie';
 import { changeWatchedQueueList, textModalButtons } from './localStorage';
-console.log('modalMovie begin file. It is before create modal window');
 
 const body = document.querySelector('body');
 const card = document.querySelector('[data-modal-open]');
 const modal = document.querySelector('[data-modal]');
+const backdrop = document.querySelector('.backdrop');
 
 if (card) {
   card.addEventListener('click', openModal);
@@ -19,14 +19,12 @@ export function openModal(e) {
   window.addEventListener('keydown', onEscClick);
   const id = e.target.parentElement.dataset.id;
    descriptionTagMovie(id).then(() => {
-    console.log('it is after create modal window');
-    const closeBtn = document.querySelector('[data-movie-close]');
-    console.log(closeBtn);
-    closeBtn.addEventListener('click', closeModal);
-    changeWatchedQueueList(id);
-    textModalButtons(id);
+      const closeBtn = document.querySelector('[data-movie-close]');
+      closeBtn.addEventListener('click', closeModal);
+      changeWatchedQueueList(id);
+      textModalButtons(id);
   });
-  // console.log('modal', e.target.parentElement.className, id);
+
 }
 
 export function closeModal() {
@@ -44,3 +42,9 @@ function onEscClick(event) {
     window.removeEventListener('keydown', onEscClick);
   }
 }
+
+backdrop.addEventListener('click', (e) => {
+  if (e.target.className === 'backdrop') {
+    closeModal();
+  }
+});

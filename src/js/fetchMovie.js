@@ -4,7 +4,8 @@ const API_URL = "https://api.themoviedb.org/3/";
 import symbol from '../images/svg/icons.svg';
 import Pagination from 'tui-pagination';
 import { optionsSearch } from './pagination';
-import {removeSpinner, addSpinner } from './spinner';
+import { removeSpinner, addSpinner } from './spinner';
+import { closeModal } from './modalMovie';
 
 //---------------------ROUNDING METHOD--------------------------
 export function roundingMethodToFirstPlace(value) {
