@@ -44,6 +44,10 @@ a {
  */
 body {
   background-color: $color-bg-body-primary;
+
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
 }
 
 /**
